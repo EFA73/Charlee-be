@@ -14,3 +14,11 @@ bootJar {
 jar {
     enabled = true
 }
+
+bootJar {
+	enabled = true
+}
+
+jar {
+	enabled = false
+}
