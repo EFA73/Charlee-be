@@ -9,4 +9,11 @@ public class VehicleEventInfo {
     private final VehicleCycleInfo vehicleCycleInfo;
     private final String onTime;
     private final String offTime;
+
+    public VehicleEventInfo(VehicleInfo vehicleInfo, VehicleCycleInfo vehicleCycleInfo, String onTime, String offTime) {
+        this.vehicleInfo = vehicleInfo;
+        this.vehicleCycleInfo = vehicleCycleInfo;
+        this.onTime = onTime;
+        this.offTime = offTime;
+    }
 }

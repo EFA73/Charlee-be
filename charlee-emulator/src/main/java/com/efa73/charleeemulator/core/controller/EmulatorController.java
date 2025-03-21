@@ -1,12 +1,12 @@
-package com.efa73.charleeemulator.view;
+package com.efa73.charleeemulator.core.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ViewController {
+public class EmulatorController {
 
-    @GetMapping("/emulator")
+    @GetMapping("/")
     public String emulator() {
         return "emulator";
     }

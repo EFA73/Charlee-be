@@ -12,4 +12,11 @@ public class VehicleCycleInfo {
     private final String oTime;
     private final String cCnt;
     private final List<CycleData> cList;
+
+    public VehicleCycleInfo(VehicleInfo vehicleInfo, String oTime, String cCnt, List<CycleData> cList) {
+        this.vehicleInfo = vehicleInfo;
+        this.oTime = oTime;
+        this.cCnt = cCnt;
+        this.cList = cList;
+    }
 }
