@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -22,6 +22,7 @@ logging:
     com.efa73.trackee: debug
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
+    org.springframework.core.env: DEBUG # 환경 변수 로드 과정 디버깅
 
 springdoc:
   swagger-ui:
