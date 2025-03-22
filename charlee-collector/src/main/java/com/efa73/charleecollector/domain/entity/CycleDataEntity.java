@@ -1,44 +1,49 @@
-package com.efa73.charleecollector.domain.entity;
+package com. efa73.charleecollector. domain. entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
+@Entity
+@Table(name = "cycle_data")
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "cycle_data")
 public class CycleDataEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 5)
     private String sec;
 
-    private String gcd; // GPS 상태
+    @Column(nullable = false)
+    private String gcd;
 
-    private String lat; // GPS 위도
+    @Column(nullable = false)
+    private String lat;
 
-    private String lon; // GPS 경도
+    @Column(nullable = false)
+    private String lon;
 
-    private String ang; // 방향
+    @Column(nullable = false)
+    private String ang;
 
-    private String spd; // 속도
+    @Column(nullable = false)
+    private String spd;
 
-    private String sum; // 누적 주행 거리
+    @Column(nullable = false)
+    private String sum;
 
-    private String bat; // 배터리 전압
-
-    @ManyToOne
-    @JsonIgnore
-    @ToString.Exclude
-    private CycleInfoEntity cycleInfo;
+    @Column(nullable = false)
+    private String bat;
 }
