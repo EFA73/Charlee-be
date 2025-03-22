@@ -8,14 +8,6 @@ dependencies {
 }
 
 bootJar {
-    enabled = true
-}
-
-jar {
-    enabled = true
-}
-
-bootJar {
 	enabled = true
 }
 
