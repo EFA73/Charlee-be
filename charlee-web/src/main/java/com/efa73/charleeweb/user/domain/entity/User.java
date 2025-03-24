@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.user.domain;
+package com.efa73.charleeweb.user.domain.entity;
 
 import com.efa73.charleeweb.common.Common;
 import jakarta.persistence.Column;

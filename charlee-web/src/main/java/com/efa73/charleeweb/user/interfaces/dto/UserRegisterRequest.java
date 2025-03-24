@@ -1,0 +1,34 @@
+package com.efa73.charleeweb.user.dto;
+
+import com.efa73.charleeweb.user.domain.Role;
+import com.efa73.charleeweb.user.domain.User;
+
+/**
+ * DTO for {@link com.efa73.charleeweb.user.domain.User}
+ */
+public record UserRegisterRequest(
+        String name,
+        String email,
+        String phone,
+        Role role
+) {
+
+    public static UserRegisterRequest of(String name, String email, String phone, Role role) {
+        return new UserRegisterRequest(name, email, phone, role);
+    }
+
+    public static UserRegisterRequest from(User user) {
+        return new UserRegisterRequest(
+                user.getEmail(),
+                user.getName(),
+                user.getPhone(),
+                user.getRole()
+        );
+    }
+
+//    public User toEntity() {
+//        return User.of(
+//
+//        )
+//    }
+}

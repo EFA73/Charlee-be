@@ -1,8 +1,8 @@
 package com.efa73.charleeweb.config;
 
-import com.efa73.charleeweb.user.domain.Role;
-import com.efa73.charleeweb.user.domain.User;
-import com.efa73.charleeweb.user.repository.UserRepository;
+import com.efa73.charleeweb.user.domain.entity.Role;
+import com.efa73.charleeweb.user.domain.entity.User;
+import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
