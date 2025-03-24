@@ -22,4 +22,3 @@ admin:
   name: ${ADMIN_NAME}
   email: ${ADMIN_EMAIL}
   password: ${ADMIN_PASSWORD}
->>>>>>> 7ce9466 (chore: jwt, admin 관련 환경변수 추가)
