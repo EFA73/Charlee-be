@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 /**
  * DTO for {@link com.efa73.charleeweb.user.domain.User}
  */
-public record UserRegisterDto(
+public record UserRegisterRequest(
         Long id,
         String name,
         String email,
@@ -17,18 +17,18 @@ public record UserRegisterDto(
         LocalDateTime updatedAt
 ) {
 
-    public static UserRegisterDto of(Long id, String name, String email, String phone, Role role) {
-        return new UserRegisterDto(id, name, email, phone, role, null, null);
+    public static UserRegisterRequest of(Long id, String name, String email, String phone, Role role) {
+        return new UserRegisterRequest(id, name, email, phone, role, null, null);
     }
 
-    public static UserRegisterDto of(Long id, String name, String email, String phone, Role role,
-                                     LocalDateTime createdAt,
-                                     LocalDateTime updatedAt) {
-        return new UserRegisterDto(id, name, email, phone, role, createdAt, updatedAt);
+    public static UserRegisterRequest of(Long id, String name, String email, String phone, Role role,
+                                         LocalDateTime createdAt,
+                                         LocalDateTime updatedAt) {
+        return new UserRegisterRequest(id, name, email, phone, role, createdAt, updatedAt);
     }
 
-    public static UserRegisterDto from(User user) {
-        return new UserRegisterDto(
+    public static UserRegisterRequest from(User user) {
+        return new UserRegisterRequest(
                 user.getId(),
                 user.getEmail(),
                 user.getName(),
