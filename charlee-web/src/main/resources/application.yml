@@ -17,3 +17,8 @@ spring:
 jwt:
   expiration_time: ${JWT_EXP_TIME}
   secret: ${JWT_SECRET}
+
+admin:
+  name: ${ADMIN_NAME}
+  email: ${ADMIN_EMAIL}
+  password: ${ADMIN_PASSWORD}
