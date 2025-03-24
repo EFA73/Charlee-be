@@ -1,4 +1,4 @@
-package com.efa73.charleeemulator.core.domain;
+package com.efa73.charleeemulator.core.dto;
 
 /**
  * sec: 발생시간 '초'

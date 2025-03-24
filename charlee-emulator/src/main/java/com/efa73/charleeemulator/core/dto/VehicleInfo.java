@@ -1,4 +1,4 @@
-package com.efa73.charleeemulator.core.domain;
+package com.efa73.charleeemulator.core.dto;
 
 /**
  * mdn: 차량 식별 key
