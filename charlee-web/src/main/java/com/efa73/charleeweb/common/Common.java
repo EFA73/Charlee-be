@@ -20,16 +20,8 @@ public abstract class Common {
     @Column(nullable = false, updatable = false)
     protected LocalDateTime createdAt;
 
-//    @CreatedBy
-//    @Column(nullable = false, updatable = false)
-//    private User createdBy;
-
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @LastModifiedDate
     @Column(nullable = false)
     protected LocalDateTime updatedAt;
-
-//    @LastModifiedBy
-//    @Column(nullable = false)
-//    private User modifiedBy;
 }
