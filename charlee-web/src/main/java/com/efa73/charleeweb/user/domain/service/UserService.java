@@ -1,5 +1,7 @@
 package com.efa73.charleeweb.user.domain.service;
 
+import com.efa73.charleeweb.common.exception.CustomErrorCode;
+import com.efa73.charleeweb.common.exception.CustomException;
 import com.efa73.charleeweb.user.domain.entity.User;
 import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterRequest;
@@ -19,6 +21,7 @@ public class UserService {
 
     @Transactional
     public Long registerUser(UserRegisterRequest request) {
+        validateEmailDuplicate(request.email());
         User user = User.from(
                 request.name(),
                 request.email(),
@@ -29,6 +32,12 @@ public class UserService {
         userRepository.save(user);
 //        notifyPassword(); //TODO: 새 유저에게 패스워드 알려주는 기능 필요
         return user.getId();
+    }
+
+    private void validateEmailDuplicate(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new CustomException(CustomErrorCode.EMAIL_ALREADY_EXISTS);
+        }
     }
 
     private static String generateRandomPassword() {
