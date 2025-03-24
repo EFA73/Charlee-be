@@ -1,10 +1,10 @@
-package com.efa73.charleeweb.user.dto;
+package com.efa73.charleeweb.user.interfaces.dto;
 
-import com.efa73.charleeweb.user.domain.Role;
-import com.efa73.charleeweb.user.domain.User;
+import com.efa73.charleeweb.user.domain.entity.Role;
+import com.efa73.charleeweb.user.domain.entity.User;
 
 /**
- * DTO for {@link com.efa73.charleeweb.user.domain.User}
+ * DTO for {@link User}
  */
 public record UserRegisterRequest(
         String name,
