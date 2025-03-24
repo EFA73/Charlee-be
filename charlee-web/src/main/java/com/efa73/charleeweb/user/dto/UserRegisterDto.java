@@ -38,10 +38,4 @@ public record UserRegisterDto(
                 user.getUpdatedAt()
         );
     }
-
-//    public User toEntity() {
-//        return User.of(
-//
-//        )
-//    }
 }
