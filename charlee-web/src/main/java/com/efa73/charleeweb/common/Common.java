@@ -1,0 +1,35 @@
+package com.efa73.charleeweb.common;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import java.time.LocalDateTime;
+import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Getter
+@EntityListeners(AuditingEntityListener.class)
+@MappedSuperclass
+public abstract class Common {
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    protected LocalDateTime createdAt;
+
+//    @CreatedBy
+//    @Column(nullable = false, updatable = false)
+//    private User createdBy;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @LastModifiedDate
+    @Column(nullable = false)
+    protected LocalDateTime updatedAt;
+
+//    @LastModifiedBy
+//    @Column(nullable = false)
+//    private User modifiedBy;
+}
