@@ -1,11 +1,12 @@
 package com.efa73.charleeweb.common;
 
+import com.efa73.charleeweb.common.exception.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.lang.Nullable;
 
 public record Api<T>(
-        int code,
+        Integer code,
         HttpStatusCode status,
         @Nullable T body
 ) {
@@ -20,7 +21,7 @@ public record Api<T>(
         return new Api<>(created.value(), created, body);
     }
 
-//    public static <T> Api<T> error(final CustomException e) {
-//        return new Api<>(status.value(), status, message);
-//    }
+    public static <T> Api<String> error(final CustomException e) {
+        return new Api<>(e.getCode().value(), e.getCode(), e.getMessage());
+    }
 }
