@@ -1,11 +1,11 @@
 package com.efa73.charleecollector.interfaces.controller;
 
-import com.efa73.charleecollector.domain.entity.CycleDataEntity;
-import com.efa73.charleecollector.domain.entity.CycleInfoEntity;
+import com.efa73.charleecollector.domain.entity.CycleData;
+import com.efa73.charleecollector.domain.entity.CycleInfo;
 import com.efa73.charleecollector.domain.service.CollectService;
-import com.efa73.charleecollector.interfaces.dto.request.CycleDataDto;
-import com.efa73.charleecollector.interfaces.dto.request.CycleInfoDto;
-import com.efa73.charleecollector.interfaces.dto.request.EventInfoDto;
+import com.efa73.charleecollector.interfaces.dto.request.CycleDataRequest;
+import com.efa73.charleecollector.interfaces.dto.request.CycleInfoRequest;
+import com.efa73.charleecollector.interfaces.dto.request.EventInfoRequest;
 import com.efa73.charleecollector.interfaces.dto.response.CollectResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +23,10 @@ public class CollectController {
     private final CollectService collectService;
 
     @PostMapping("/cycle/collect")
-    public CollectResponse collectCycle(@RequestBody CycleInfoDto cycleInfoDto) {
+    public CollectResponse collectCycle(@RequestBody CycleInfoRequest cycleInfoRequest) {
 
-        CycleInfoEntity cycleInfo = CycleInfoDto.toEntity(cycleInfoDto);
-        List<CycleDataEntity> cycleDataList = CycleDataDto.toEntityList(cycleInfoDto.cList());
+        CycleInfo cycleInfo = CycleInfoRequest.toEntity(cycleInfoRequest);
+        List<CycleData> cycleDataList = CycleDataRequest.toEntityList(cycleInfoRequest.cList(), cycleInfo);
 
         String mdn = collectService.collectCycle(cycleInfo, cycleDataList);
 
@@ -38,9 +38,9 @@ public class CollectController {
     }
 
     @PostMapping("/event/collect")
-    public CollectResponse collectEvent(@RequestBody EventInfoDto eventInfoDto) {
+    public CollectResponse collectEvent(@RequestBody EventInfoRequest eventInfoRequest) {
 
-        CycleInfoEntity eventInfo = EventInfoDto.toEntity(eventInfoDto);
+        CycleInfo eventInfo = EventInfoRequest.toEntity(eventInfoRequest);
 
         String mdn = collectService.collectEvent(eventInfo);
 

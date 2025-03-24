@@ -24,7 +24,9 @@ import lombok.NoArgsConstructor;
         }
 )
 @Getter @NoArgsConstructor @AllArgsConstructor @Builder
-public class CycleInfoEntity {
+public class CycleInfo {
+
+    public static final int DATA_LIST_LENGTH = 60;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,10 +1,10 @@
 package com.efa73.charleecollector.interfaces.dto.request;
 
-import com.efa73.charleecollector.domain.entity.CycleInfoEntity;
+import com.efa73.charleecollector.domain.entity.CycleInfo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public record EventInfoDto(
+public record EventInfoRequest(
         String mdn,
         String tid,
         String mid,
@@ -20,31 +20,31 @@ public record EventInfoDto(
         String sum
 ) {
 
-    public static CycleInfoEntity toEntity(EventInfoDto eventInfoDto) {
+    public static CycleInfo toEntity(EventInfoRequest eventInfoRequest) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ccyyMMddHHmmss");
 
-        if(eventInfoDto.onTime != null) {
+        if(eventInfoRequest.onTime != null) {
 
-            String time = eventInfoDto.onTime();
-            return CycleInfoEntity.builder()
-                    .mdn(eventInfoDto.mdn)
-                    .tid(eventInfoDto.tid)
-                    .mid(eventInfoDto.mid)
-                    .pv(eventInfoDto.pv)
-                    .did(eventInfoDto.did)
+            String time = eventInfoRequest.onTime();
+            return CycleInfo.builder()
+                    .mdn(eventInfoRequest.mdn)
+                    .tid(eventInfoRequest.tid)
+                    .mid(eventInfoRequest.mid)
+                    .pv(eventInfoRequest.pv)
+                    .did(eventInfoRequest.did)
                     .onTime(LocalDateTime.parse(time, formatter))
                     .eventType(EventType.ON.getType())
                     .build();
         } else {
 
-            String time = eventInfoDto.offTime();
-            return CycleInfoEntity.builder()
-                    .mdn(eventInfoDto.mdn)
-                    .tid(eventInfoDto.tid)
-                    .mid(eventInfoDto.mid)
-                    .pv(eventInfoDto.pv)
-                    .did(eventInfoDto.did)
+            String time = eventInfoRequest.offTime();
+            return CycleInfo.builder()
+                    .mdn(eventInfoRequest.mdn)
+                    .tid(eventInfoRequest.tid)
+                    .mid(eventInfoRequest.mid)
+                    .pv(eventInfoRequest.pv)
+                    .did(eventInfoRequest.did)
                     .offTime(LocalDateTime.parse(time, formatter))
                     .eventType(EventType.OFF.getType())
                     .build();
