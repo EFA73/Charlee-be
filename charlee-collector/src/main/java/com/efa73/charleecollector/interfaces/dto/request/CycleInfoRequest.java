@@ -9,25 +9,19 @@ public record CycleInfoRequest(
         String mdn,
         String tid,
         String mid,
-        String pv,
         String did,
+        String pv,
         String oTime,
         String cCnt,
         List<CycleDataRequest> cList
 ) {
 
-    public static CycleInfo toEntity(CycleInfoRequest cycleInfoRequest) {
-
+    public static CycleInfo createEntity(CycleInfoRequest cycleInfoRequest) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ccyyMMddHHmm");
+        LocalDateTime oTime = LocalDateTime.parse(cycleInfoRequest.oTime, formatter);
 
-        return CycleInfo.builder()
-                .mdn(cycleInfoRequest.mdn)
-                .tid(cycleInfoRequest.tid)
-                .mid(cycleInfoRequest.mid)
-                .pv(cycleInfoRequest.pv)
-                .did(cycleInfoRequest.did)
-                .oTime(LocalDateTime.parse(cycleInfoRequest.oTime, formatter))
-                .eventType(EventType.CYCLE.getType())
-                .build();
+        return CycleInfo.createCycleEntity(cycleInfoRequest.mdn, cycleInfoRequest.tid, cycleInfoRequest.mid,
+                cycleInfoRequest.did,
+                cycleInfoRequest.pv, oTime, EventType.CYCLE.getType());
     }
 }

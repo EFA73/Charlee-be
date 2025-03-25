@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/collector")
+@RequestMapping("/api/collector")
 @RequiredArgsConstructor
 public class CollectController {
 
@@ -25,29 +25,24 @@ public class CollectController {
     @PostMapping("/cycle/collect")
     public CollectResponse collectCycle(@RequestBody CycleInfoRequest cycleInfoRequest) {
 
-        CycleInfo cycleInfo = CycleInfoRequest.toEntity(cycleInfoRequest);
-        List<CycleData> cycleDataList = CycleDataRequest.toEntityList(cycleInfoRequest.cList(), cycleInfo);
+        CycleInfo cycleInfo = CycleInfoRequest.createEntity(cycleInfoRequest);
+
+        List<CycleData> cycleDataList = cycleInfoRequest.cList().stream().map(request -> {
+            return CycleDataRequest.createEntity(request, cycleInfo);
+        }).toList();
 
         String mdn = collectService.collectCycle(cycleInfo, cycleDataList);
 
-        return CollectResponse.builder()
-                .rstCd(String.valueOf(HttpStatus.OK.value()))
-                .rstMsg("")
-                .mdn(mdn)
-                .build();
+        return new CollectResponse(String.valueOf(HttpStatus.OK), "", mdn);
     }
 
     @PostMapping("/event/collect")
     public CollectResponse collectEvent(@RequestBody EventInfoRequest eventInfoRequest) {
 
-        CycleInfo eventInfo = EventInfoRequest.toEntity(eventInfoRequest);
+        CycleInfo eventInfo = EventInfoRequest.createEntity(eventInfoRequest);
 
         String mdn = collectService.collectEvent(eventInfo);
 
-        return CollectResponse.builder()
-                .rstCd(String.valueOf(HttpStatus.OK.value()))
-                .rstMsg("")
-                .mdn(mdn)
-                .build();
+        return new CollectResponse(String.valueOf(HttpStatus.OK), "", mdn);
     }
 }

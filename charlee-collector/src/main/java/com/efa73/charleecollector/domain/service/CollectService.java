@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CollectService {
 
-
     private final CycleInfoRepository cycleInfoRepository;
     private final CycleDataRepository cycleDataRepository;
 
@@ -22,7 +21,6 @@ public class CollectService {
     public String collectCycle(CycleInfo cycleInfo, List<CycleData> cycleDataList) {
         try {
             var saved = cycleInfoRepository.save(cycleInfo);
-
             cycleDataRepository.saveAll(cycleDataList);
 
             return saved.getMdn();

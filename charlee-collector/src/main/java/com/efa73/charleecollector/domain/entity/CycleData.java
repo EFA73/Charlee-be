@@ -1,4 +1,4 @@
-package com. efa73.charleecollector. domain. entity;
+package com.efa73.charleecollector.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,9 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,8 +16,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "cycle_data")
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class CycleData {
 
     @Id
@@ -55,5 +50,20 @@ public class CycleData {
     @JoinColumn(name = "cycle_info_id")
     private CycleInfo cycleInfo;
 
+    public static CycleData createEntity(String sec, String gcd, String lat, String lon, String ang, String spd,
+                                         String sum,
+                                         String bat, CycleInfo cycleInfo) {
+        CycleData cycleData = new CycleData();
+        cycleData.sec = sec;
+        cycleData.gcd = gcd;
+        cycleData.lat = lat;
+        cycleData.lon = lon;
+        cycleData.ang = ang;
+        cycleData.spd = spd;
+        cycleData.sum = sum;
+        cycleData.bat = bat;
+        cycleData.cycleInfo = cycleInfo;
 
+        return cycleData;
+    }
 }
