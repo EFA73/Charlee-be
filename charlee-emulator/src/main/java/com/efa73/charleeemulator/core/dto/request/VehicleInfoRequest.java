@@ -12,4 +12,3 @@ public record VehicleInfoRequest(String mdn, String tid, String mid, String pv, 
         this(mdn, "A001", "6", "5", "1");
     }
 }
-

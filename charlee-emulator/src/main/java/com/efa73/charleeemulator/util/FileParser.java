@@ -1,13 +1,14 @@
 package com.efa73.charleeemulator.util;
 
 import com.efa73.charleeemulator.core.domain.Point;
+import org.springframework.core.io.ClassPathResource;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.core.io.ClassPathResource;
 
 public class FileParser {
     public static List<Point> parseFromCsvFile(final String filePath) {
@@ -42,4 +43,3 @@ public class FileParser {
         return Arrays.asList(input.split(","));
     }
 }
-
