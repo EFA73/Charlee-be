@@ -22,7 +22,7 @@ public class UserService {
     @Transactional
     public Long registerUser(UserRegisterRequest request) {
         validateEmailDuplicate(request.email());
-        User user = User.from(
+        User user = User.of(
                 request.name(),
                 request.email(),
                 passwordEncoder.encode(generateRandomPassword()),

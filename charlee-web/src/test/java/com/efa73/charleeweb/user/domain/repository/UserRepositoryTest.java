@@ -20,7 +20,7 @@ class UserRepositoryTest {
     @Test
     void Role이_ADMIN인_계정이_존재하면_true_반환() {
         //given
-        User admin = User.from("admin", "admin@test.com", "testtest", null, Role.ADMIN);
+        User admin = User.of("admin", "admin@test.com", "testtest", null, Role.ADMIN);
         userRepository.save(admin);
 
         //when
@@ -43,7 +43,7 @@ class UserRepositoryTest {
     void 이메일이_존재하면_true_반환() {
         // given
         String email = "user@example.com";
-        User user = User.from("user", email, "password123", null, Role.USER);
+        User user = User.of("user", email, "password123", null, Role.USER);
         userRepository.save(user);
 
         // when

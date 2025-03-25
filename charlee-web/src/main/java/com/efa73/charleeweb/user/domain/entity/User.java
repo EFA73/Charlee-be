@@ -38,7 +38,7 @@ public class User extends Common {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static User from(String name, String email, String password, String phone, Role role) {
+    public static User of(String name, String email, String password, String phone, Role role) {
         return new User(name, email, password, phone, role);
     }
 

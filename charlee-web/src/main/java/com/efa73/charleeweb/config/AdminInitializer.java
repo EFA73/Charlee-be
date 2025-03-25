@@ -31,7 +31,8 @@ public class AdminInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (!userRepository.existsByRole(Role.ADMIN)) {
-            User admin = User.from(adminName, adminEmail, passwordEncoder.encode(adminPassword), null, Role.ADMIN);
+            User admin = User.of(adminName, adminEmail, passwordEncoder.encode(adminPassword), null,
+                    Role.ADMIN);
             userRepository.save(admin);
         }
     }
