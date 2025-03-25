@@ -1,5 +1,8 @@
 package com.efa73.charleeemulator.core.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Point {
     private final double lat;
     private final double lon;
