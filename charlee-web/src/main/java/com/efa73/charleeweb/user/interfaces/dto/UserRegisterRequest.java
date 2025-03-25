@@ -25,10 +25,4 @@ public record UserRegisterRequest(
                 user.getRole()
         );
     }
-
-//    public User toEntity() {
-//        return User.of(
-//
-//        )
-//    }
 }
