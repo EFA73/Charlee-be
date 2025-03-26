@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.user.interfaces.controller;
 
-import com.efa73.charleeweb.common.Api;
+import com.efa73.charleeweb.common.dto.Api;
 import com.efa73.charleeweb.user.domain.service.UserService;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterRequest;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterResponse;
