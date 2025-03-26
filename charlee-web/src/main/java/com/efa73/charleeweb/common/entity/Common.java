@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.common;
+package com.efa73.charleeweb.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
