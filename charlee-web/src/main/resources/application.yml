@@ -24,4 +24,4 @@ admin:
   password: ${ADMIN_PASSWORD}
 
 collector:
-  url: http://localhost:8080/collector
+  url: http://localhost:8081/collector
