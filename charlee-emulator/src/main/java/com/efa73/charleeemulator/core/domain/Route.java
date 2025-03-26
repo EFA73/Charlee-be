@@ -1,8 +1,8 @@
 package com.efa73.charleeemulator.core.domain;
 
-import com.efa73.charleeemulator.util.FileParser;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +13,10 @@ import java.util.List;
 
 @Getter
 public class Route {
-    private final List<Point> points;
+    private List<Point> points = new ArrayList<>();
 
-    public Route() {
-        points = FileParser.parseFromCsvFile("location-data.csv");
+    public void addPoint(Point point) {
+        points.add(point);
     }
 
     public Point getSinglePoint(int position) {
