@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.user.domain;
+package com.efa73.charleeweb.user.domain.entity;
 
 import com.efa73.charleeweb.common.Common;
 import jakarta.persistence.Column;
@@ -8,11 +8,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Table(name = "\"user\"") //TODO: 테스트 통과하기 위해 임시로 추가
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User extends Common {
@@ -36,7 +38,7 @@ public class User extends Common {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static User from(String name, String email, String password, String phone, Role role) {
+    public static User of(String name, String email, String password, String phone, Role role) {
         return new User(name, email, password, phone, role);
     }
 

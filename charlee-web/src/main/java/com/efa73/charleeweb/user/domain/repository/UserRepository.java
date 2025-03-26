@@ -1,7 +1,7 @@
-package com.efa73.charleeweb.user.repository;
+package com.efa73.charleeweb.user.domain.repository;
 
-import com.efa73.charleeweb.user.domain.Role;
-import com.efa73.charleeweb.user.domain.User;
+import com.efa73.charleeweb.user.domain.entity.Role;
+import com.efa73.charleeweb.user.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByRole(Role role);
+
+    boolean existsByEmail(String email);
 }
