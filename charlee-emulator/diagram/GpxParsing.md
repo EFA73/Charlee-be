@@ -1,6 +1,4 @@
----
-title: GPX Parsing
----
+```mermaid
 classDiagram
     class GpxParser {
       +Route parseFromGpx(path: String)
@@ -23,4 +21,4 @@ classDiagram
     GpxLoader --> RouteService : 생성된 Route를 RouteService에 저장
     GpxParser ..> Route : Route 생성
     RouteService ..> Route : Route 관리
-
+```
