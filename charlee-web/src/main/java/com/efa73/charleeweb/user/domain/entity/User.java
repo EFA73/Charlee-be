@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Table(name = "\"user\"")
+@Table(name = "\"user\"") //TODO: 테스트 통과하기 위해 임시로 추가
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User extends Common {
