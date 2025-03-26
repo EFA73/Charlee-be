@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,11 @@ public class CompanyController {
     public ResponseEntity<Api<CompanyResponse>> createCompany(@RequestBody CompanyRequest companyRequest) {
 
         Company company = companyService.createCompany(CompanyRequest.createEntity(companyRequest));
+        
         CompanyResponse response = CompanyResponse.createResponse(company);
 
-        return ResponseEntity.created(URI.create("/company/" + company.getId())).body(Api.of(response));
+        return ResponseEntity.created(URI.create("/api/company/" + company.getId()))
+                .body(Api.of(response));
     }
 
     @GetMapping("/{companyId}")
@@ -38,6 +41,18 @@ public class CompanyController {
 
         CompanyResponse response = CompanyResponse.createResponse(company);
 
-        return ResponseEntity.ok().body(Api.of(response));
+        return ResponseEntity.ok()
+                .body(Api.of(response));
+    }
+
+    @PutMapping("/{companyId}")
+    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyRequest companyRequest,
+                                                              @PathVariable Long companyId) {
+        Company updatedCompany = companyService.updateCompany(companyRequest, companyId);
+
+        CompanyResponse response = CompanyResponse.createResponse(updatedCompany);
+
+        return ResponseEntity.ok()
+                .body(Api.of(response));
     }
 }

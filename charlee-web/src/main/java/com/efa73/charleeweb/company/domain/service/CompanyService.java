@@ -2,6 +2,7 @@ package com.efa73.charleeweb.company.domain.service;
 
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
+import com.efa73.charleeweb.company.interfaces.dto.CompanyRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,17 @@ public class CompanyService {
 
     public Company getCompany(Long companyId) {
 
-        return companyRepository.findById(companyId).orElse(null);
+        return companyRepository.findById(companyId).orElseThrow();
+    }
+
+    public Company updateCompany(CompanyRequest companyRequest, Long companyId) {
+
+        if (companyRepository.existsById(companyId)) {
+            var company = Company.updateEntity(companyId, companyRequest.name(), companyRequest.siteLink());
+
+            return companyRepository.save(company);
+        } else {
+            return null;
+        }
     }
 }
