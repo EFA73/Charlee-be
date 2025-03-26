@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.user.dto;
+package com.efa73.charleeweb.user.interfaces.dto;
 
 public record LoginResponse(
         String token,
