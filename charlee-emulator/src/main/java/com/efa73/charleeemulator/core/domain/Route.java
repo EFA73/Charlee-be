@@ -3,7 +3,6 @@ package com.efa73.charleeemulator.core.domain;
 import com.efa73.charleeemulator.util.FileParser;
 import lombok.Getter;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  */
 
 @Getter
-public class Route implements Iterable<Point> {
+public class Route {
     private final List<Point> points;
 
     public Route() {
@@ -22,11 +21,5 @@ public class Route implements Iterable<Point> {
 
     public Point getSinglePoint(int position) {
         return points.get(position);
-    }
-
-    //for-each 안 쓸건데 이터레이터 돌려야하나? 일급 컬렉션이니까 일단 추가
-    @Override
-    public Iterator<Point> iterator() {
-        return points.iterator();
     }
 }

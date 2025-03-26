@@ -3,17 +3,21 @@ package com.efa73.charleeemulator.core.client;
 import com.efa73.charleeemulator.core.dto.request.VehicleCycleInfoRequest;
 import com.efa73.charleeemulator.core.dto.request.VehicleEventInfoRequest;
 import com.efa73.charleeemulator.core.dto.response.CollectorResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 @Component
 public class CollectorClient {
 
+    @Value("${collector.url}")
+    private String baseUrl;
+
     private final RestClient restClient;
 
     public CollectorClient() {
         this.restClient = RestClient.builder()
-                .baseUrl("http://localhost:8080/collector")
+                .baseUrl(baseUrl)
                 .build();
     }
 
