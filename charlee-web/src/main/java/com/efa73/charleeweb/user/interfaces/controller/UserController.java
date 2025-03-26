@@ -1,10 +1,12 @@
 package com.efa73.charleeweb.user.interfaces.controller;
 
 import com.efa73.charleeweb.common.Api;
+import com.efa73.charleeweb.user.domain.service.UserService;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterRequest;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterResponse;
-import com.efa73.charleeweb.user.domain.service.UserService;
+import java.net.URI;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +20,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public Api<UserRegisterResponse> registerUser(
+    public ResponseEntity<Api<UserRegisterResponse>> registerUser(
             @RequestBody UserRegisterRequest userRegisterDto
     ) {
         Long userId = userService.registerUser(userRegisterDto);
-        return Api.create(UserRegisterResponse.of(userId));
+        Api<UserRegisterResponse> userRegisterResponseApi = Api.of(UserRegisterResponse.of(userId));
+        return ResponseEntity.created(URI.create("/user/" + userId)).body(userRegisterResponseApi);
     }
 }
