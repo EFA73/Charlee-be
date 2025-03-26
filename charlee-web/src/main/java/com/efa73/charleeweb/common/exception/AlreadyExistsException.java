@@ -3,6 +3,7 @@ package com.efa73.charleeweb.common.exception;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+@Http
 @RequiredArgsConstructor
 public class CustomException extends RuntimeException {
     private final CustomErrorCode errorCode;
