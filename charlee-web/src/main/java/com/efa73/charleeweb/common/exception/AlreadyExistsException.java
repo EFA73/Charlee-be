@@ -1,18 +1,14 @@
 package com.efa73.charleeweb.common.exception;
 
-import lombok.RequiredArgsConstructor;
+import static com.efa73.charleeweb.common.exception.CustomErrorCode.EMAIL_ALREADY_EXISTS;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Http
-@RequiredArgsConstructor
-public class CustomException extends RuntimeException {
-    private final CustomErrorCode errorCode;
+@ResponseStatus(HttpStatus.CONFLICT)
+public class AlreadyExistsException extends RuntimeException {
 
-    public HttpStatus getCode() {
-        return errorCode.getHttpStatus();
-    }
-
-    public String getMessage() {
-        return errorCode.getMessage();
+    public AlreadyExistsException() {
+        super(EMAIL_ALREADY_EXISTS.getMessage());
     }
 }

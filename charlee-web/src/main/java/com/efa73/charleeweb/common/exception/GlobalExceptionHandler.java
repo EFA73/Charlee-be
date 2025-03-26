@@ -1,6 +1,7 @@
 package com.efa73.charleeweb.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -9,16 +10,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = {CustomException.class})
-    protected ResponseEntity<ExceptionResponse> handleCustomException(CustomException e) {
+    @ExceptionHandler(value = {AlreadyExistsException.class})
+    protected ResponseEntity<ExceptionResponse> handleAlreadyExistsException(AlreadyExistsException e) {
         log.error(e.getMessage());
-        ExceptionResponse<String> response = new ExceptionResponse<>(
-                e.getCode().value(),
-                e.getCode(),
-                e.getMessage()
-        );
+        ExceptionResponse<String> response = ExceptionResponse.of(e.getMessage());
         return ResponseEntity
-                .status(e.getCode())
+                .status(HttpStatus.CONFLICT)
                 .body(response);
     }
 }
