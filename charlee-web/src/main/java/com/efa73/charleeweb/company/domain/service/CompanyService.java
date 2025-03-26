@@ -1,7 +1,7 @@
-package com.efa73.charleeweb.company.service;
+package com.efa73.charleeweb.company.domain.service;
 
-import com.efa73.charleeweb.company.entity.Company;
-import com.efa73.charleeweb.company.repository.CompanyRepository;
+import com.efa73.charleeweb.company.domain.entity.Company;
+import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,9 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public String createCompany(Company company) {
+    public Company createCompany(Company company) {
 
-        var saved = companyRepository.save(company);
-
-        return saved.getName();
+        return companyRepository.save(company);
     }
 
     public Company getCompany(Long companyId) {

@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.company.entity;
+package com.efa73.charleeweb.company.domain.entity;
 
 import com.efa73.charleeweb.common.Common;
 import jakarta.persistence.Entity;

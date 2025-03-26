@@ -1,6 +1,6 @@
-package com.efa73.charleeweb.company.dto;
+package com.efa73.charleeweb.company.interfaces.dto;
 
-import com.efa73.charleeweb.company.entity.Company;
+import com.efa73.charleeweb.company.domain.entity.Company;
 
 public record CompanyResponse(Long id, String name, String siteLink) {
 
