@@ -1,6 +1,7 @@
 package com.efa73.charleeweb.user.domain.service;
 
-import com.efa73.charleeweb.common.exception.AlreadyExistsException;
+import com.efa73.charleeweb.common.exception.CharleeException;
+import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.user.domain.entity.User;
 import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterRequest;
@@ -36,7 +37,7 @@ public class UserService {
 
     private void validateEmailDuplicate(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new AlreadyExistsException();
+            throw new CharleeException(CommonErrorCode.EMAIL_ALREADY_EXISTS);
         }
     }
 

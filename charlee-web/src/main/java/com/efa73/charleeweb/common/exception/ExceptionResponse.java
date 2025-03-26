@@ -5,7 +5,7 @@ import org.springframework.lang.Nullable;
 public record ExceptionResponse<T>(
         @Nullable T message
 ) {
-    public static ExceptionResponse of(String message) {
-        return new ExceptionResponse(message);
+    public static <T> ExceptionResponse<T> of(T message) {
+        return new ExceptionResponse<>(message);
     }
 }
