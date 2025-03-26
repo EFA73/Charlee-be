@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.user.domain.entity;
 
-import com.efa73.charleeweb.common.Common;
+import com.efa73.charleeweb.common.entity.Common;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -26,7 +26,7 @@ public class User extends Common {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
