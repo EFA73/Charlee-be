@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum CustomErrorCode {
     EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT, "Email already exists."),
+    ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "Entity not found."),
     ;
 
     private final HttpStatus httpStatus;
