@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.company.interfaces.dto;
+package com.efa73.charleeweb.company.interfaces.dto.response;
 
 import com.efa73.charleeweb.company.domain.entity.Company;
 

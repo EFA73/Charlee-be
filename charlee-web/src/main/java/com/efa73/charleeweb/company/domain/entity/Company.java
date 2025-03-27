@@ -35,11 +35,8 @@ public class Company extends Common {
         return company;
     }
 
-    public static Company updateEntity(Long id, String name, String siteLink) {
-        Company company = new Company();
-        company.id = id;
-        company.name = name;
-        company.siteLink = siteLink;
-        return company;
+    public void updateEntity(String name, String siteLink) {
+        this.name = name;
+        this.siteLink = siteLink;
     }
 }
