@@ -7,11 +7,13 @@ import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.efa73.charleeweb.user.interfaces.dto.UserRegisterRequest;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 //@Transactional(readOnly = true)
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -22,10 +24,12 @@ public class UserService {
     @Transactional
     public Long registerUser(UserRegisterRequest request) {
         validateEmailDuplicate(request.email());
+        String rawPassword = generateRandomPassword();
+        log.info("register password: {}", rawPassword); //TODO: notifyPassword() 구현 후 삭제
         User user = User.of(
                 request.name(),
                 request.email(),
-                passwordEncoder.encode(generateRandomPassword()),
+                passwordEncoder.encode(rawPassword),
                 request.phone(),
                 request.role()
         );
