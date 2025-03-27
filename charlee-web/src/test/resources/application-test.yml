@@ -2,6 +2,7 @@ spring:
   config:
     activate:
       on-profile: test
+
   datasource:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}?useSSL=${MYSQL_SSL}&useUnicode=${MYSQL_UNICODE}&allowPublicKeyRetrieval=${MYSQL_KEY}
     username: ${MYSQL_USER}
