@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class CharleeException extends RuntimeException {
-    private final Integer httpStatus;
+    private final int httpStatus;
 
     public CharleeException(CharleeErrorCode charleeErrorCode) {
         super(charleeErrorCode.getMessage());

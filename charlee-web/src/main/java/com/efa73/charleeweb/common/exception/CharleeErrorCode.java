@@ -1,7 +1,7 @@
 package com.efa73.charleeweb.common.exception;
 
 public interface CharleeErrorCode {
-    Integer getHttpStatus();
+    int getHttpStatus();
 
     String getMessage();
 }
