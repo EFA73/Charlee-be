@@ -1,7 +1,6 @@
 package com.efa73.charleeweb.company.domain.entity;
 
-import com.efa73.charleeweb.account.domain.entity.Account;
-import com.efa73.charleeweb.common.Common;
+import com.efa73.charleeweb.common.entity.Common;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

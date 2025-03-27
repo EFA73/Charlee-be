@@ -1,6 +1,7 @@
 package com.efa73.charleeweb.util;
 
-import com.efa73.charleeweb.common.exception.EmptyAccessTokenException;
+import com.efa73.charleeweb.common.exception.CharleeException;
+import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.user.domain.entity.User;
 import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import jakarta.servlet.FilterChain;
@@ -57,9 +58,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 checkAccessTokenAndAuthentication(request, response, filterChain);
             }
             if (accessToken == null) {
-                throw new EmptyAccessTokenException();
+                throw new CharleeException(CommonErrorCode.EMPTY_ACCESS_TOKEN);
             }
-        } catch (EmptyAccessTokenException e) {
+        } catch (CharleeException e) {
             log.info("Token is invalid or expired");
             handleInvalidTokenException(response, e);
         }
@@ -79,7 +80,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //        }
     }
 
-    private void handleInvalidTokenException(HttpServletResponse response, EmptyAccessTokenException e)
+    private void handleInvalidTokenException(HttpServletResponse response, CharleeException e)
             throws IOException {
 
         response.setContentType("application/json");
