@@ -51,7 +51,7 @@ public class JwtTokenProvider {
     /**
      * AccessToken 생성
      */
-    private String createAccessToken(String email, String role, Long userId) {
+    public String createAccessToken(String email, String role, Long userId) {
         Date now = new Date();
         Date expireAt = new Date(now.getTime() + accessTokenExpTime);
 
@@ -67,7 +67,7 @@ public class JwtTokenProvider {
     /**
      * RefreshToken 생성
      */
-    private String createRefreshToken() {
+    public String createRefreshToken() {
         Date now = new Date();
         Date expireAt = new Date(now.getTime() + accessTokenExpTime);
 
@@ -80,7 +80,7 @@ public class JwtTokenProvider {
     /**
      * Response header에 AccessToken 넣기
      */
-    public void sendAccessToken(HttpServletResponse response, String accessToken) {
+    public void addAccessTokenToResponse(HttpServletResponse response, String accessToken) {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader(accessHeader, accessToken);
     }
@@ -88,7 +88,7 @@ public class JwtTokenProvider {
     /**
      * Response header에 AccessToken, RefreshToken 넣기
      */
-    public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken) {
+    public void addAccessAndRefreshTokenToResponse(HttpServletResponse response, String accessToken) {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader(accessHeader, accessToken);
         response.setHeader(refreshHeader, refreshHeader);
