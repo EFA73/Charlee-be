@@ -8,6 +8,7 @@ import com.efa73.charleeweb.company.interfaces.dto.CompanyResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class CompanyController {
     public ResponseEntity<Api<CompanyResponse>> createCompany(@RequestBody CompanyRequest companyRequest) {
 
         Company company = companyService.createCompany(CompanyRequest.createEntity(companyRequest));
-        
+
         CompanyResponse response = CompanyResponse.createResponse(company);
 
         return ResponseEntity.created(URI.create("/api/company/" + company.getId()))
@@ -54,5 +55,13 @@ public class CompanyController {
 
         return ResponseEntity.ok()
                 .body(Api.of(response));
+    }
+
+    @DeleteMapping("/{companyId}")
+    public ResponseEntity<Api<CompanyResponse>> deleteCompany(@PathVariable Long companyId) {
+
+        companyService.deleteCompany(companyId);
+
+        return ResponseEntity.noContent().build();
     }
 }

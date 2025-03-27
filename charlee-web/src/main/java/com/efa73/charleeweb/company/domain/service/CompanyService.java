@@ -3,6 +3,7 @@ package com.efa73.charleeweb.company.domain.service;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
 import com.efa73.charleeweb.company.interfaces.dto.CompanyRequest;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ public class CompanyService {
 
     public Company getCompany(Long companyId) {
 
-        return companyRepository.findById(companyId).orElseThrow();
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company not found"));
     }
 
     public Company updateCompany(CompanyRequest companyRequest, Long companyId) {
@@ -29,7 +31,15 @@ public class CompanyService {
 
             return companyRepository.save(company);
         } else {
-            return null;
+            throw new EntityNotFoundException("Company not found");
+        }
+    }
+
+    public void deleteCompany(Long companyId) {
+        if (companyRepository.existsById(companyId)) {
+            companyRepository.deleteById(companyId);
+        } else {
+            throw new EntityNotFoundException("Company not found");
         }
     }
 }
