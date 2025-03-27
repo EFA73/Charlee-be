@@ -3,6 +3,7 @@ package com.efa73.charleeemulator.util;
 import com.efa73.charleeemulator.core.domain.Route;
 import com.efa73.charleeemulator.core.service.RouteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class GpxLoader implements CommandLineRunner {
     private final RouteService routeService;
     private final ResourceLoader resourceLoader;
@@ -27,7 +29,7 @@ public class GpxLoader implements CommandLineRunner {
         Route route = parser.parseFromGpx(gpxPath);
 
         routeService.addRoute(route);
-        System.out.println("GPX 파일 파싱 및 메모리 저장 완료");
+        log.info("GPX 파일 파싱 및 메모리 저장 완료");
     }
 }
 
