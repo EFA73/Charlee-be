@@ -29,7 +29,7 @@ public class CompanyController {
 
         Company company = companyService.createCompany(CompanyRequest.createEntity(companyRequest));
 
-        CompanyResponse response = CompanyResponse.createResponse(company);
+        CompanyResponse response = CompanyResponse.createDto(company);
 
         return ResponseEntity.created(URI.create("/api/company/" + company.getId()))
                 .body(Api.of(response));
@@ -40,7 +40,7 @@ public class CompanyController {
 
         Company company = companyService.getCompany(companyId);
 
-        CompanyResponse response = CompanyResponse.createResponse(company);
+        CompanyResponse response = CompanyResponse.createDto(company);
 
         return ResponseEntity.ok()
                 .body(Api.of(response));
@@ -51,7 +51,7 @@ public class CompanyController {
                                                               @PathVariable Long companyId) {
         Company updatedCompany = companyService.updateCompany(companyRequest, companyId);
 
-        CompanyResponse response = CompanyResponse.createResponse(updatedCompany);
+        CompanyResponse response = CompanyResponse.createDto(updatedCompany);
 
         return ResponseEntity.ok()
                 .body(Api.of(response));

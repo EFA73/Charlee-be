@@ -53,6 +53,17 @@ public class CollectRepositoryTest {
     }
 
     @Test
+    @DisplayName("시동 ON EventInfo가 DB에 잘 저장되는지 확인")
+    void saveEventInfo() {
+
+        var saved = cycleInfoRepository.save(eventInfo);
+
+        Assertions.assertThat(saved.getMdn()).isEqualTo(eventInfo.getMdn());
+        Assertions.assertThat(saved.getOnTime()).isEqualTo(eventInfo.getOnTime());
+        Assertions.assertThat(saved.getEventType()).isEqualTo(eventInfo.getEventType());
+    }
+
+    @Test
     @DisplayName("CycleData의 List가 DB에 순서대로 저장되는지 확인")
     void saveCycleData() {
         var savedList = cycleDataRepository.saveAll(cycleDataList);

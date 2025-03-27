@@ -1,5 +1,6 @@
 package com.efa73.charleeweb.company.domain.service;
 
+import com.efa73.charleeweb.common.exception.CustomErrorCode;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
 import com.efa73.charleeweb.company.interfaces.dto.CompanyRequest;
@@ -21,7 +22,7 @@ public class CompanyService {
     public Company getCompany(Long companyId) {
 
         return companyRepository.findById(companyId)
-                .orElseThrow(() -> new EntityNotFoundException("Company not found"));
+                .orElseThrow(() -> new EntityNotFoundException(CustomErrorCode.ENTITY_NOT_FOUND.getMessage()));
     }
 
     public Company updateCompany(CompanyRequest companyRequest, Long companyId) {
@@ -31,15 +32,16 @@ public class CompanyService {
 
             return companyRepository.save(company);
         } else {
-            throw new EntityNotFoundException("Company not found");
+            throw new EntityNotFoundException(CustomErrorCode.ENTITY_NOT_FOUND.getMessage());
         }
     }
 
     public void deleteCompany(Long companyId) {
+
         if (companyRepository.existsById(companyId)) {
             companyRepository.deleteById(companyId);
         } else {
-            throw new EntityNotFoundException("Company not found");
+            throw new EntityNotFoundException(CustomErrorCode.ENTITY_NOT_FOUND.getMessage());
         }
     }
 }
