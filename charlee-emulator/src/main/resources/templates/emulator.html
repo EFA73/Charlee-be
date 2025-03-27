@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Emulator</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script src="/emulator.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/emulator.css}">
+    <title>차량 정보</title>
 </head>
 <body>
-<button type="button" onClick="pressStartButton()" id="start-button">START</button>
-<button type="button" onClick="pressStopButton()" id="stop-button">STOP</button>
+
+<div class="emulator-page">
+    <div class="emulator-container">
+        <form th:object="${EmulatorForm}">
+            <div class="form-group">
+                <label class="form-label" for="vehicleNumber">차량 번호</label>
+                <input type="text" class="form-input" id="vehicleNumber">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="route">루트</label>
+                <input type="text" class="form-input" id="route">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="startDate">시작 날짜</label>
+                <input type="text" class="form-input" id="startDate">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="action" value="start" class="btn btn-start">START</button>
+                <button type="submit" name="action" value="stop" class="btn btn-stop">STOP</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
