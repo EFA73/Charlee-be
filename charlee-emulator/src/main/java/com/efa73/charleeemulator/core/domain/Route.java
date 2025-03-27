@@ -1,6 +1,5 @@
 package com.efa73.charleeemulator.core.domain;
 
-import com.efa73.charleeemulator.util.FileParser;
 import lombok.Getter;
 
 import java.util.List;
@@ -10,13 +9,16 @@ import java.util.List;
  * <p/>
  * 프로그램 실행 시 파일로부터 경로를 읽어들여 저장
  */
-
 @Getter
 public class Route {
     private final List<Point> points;
 
-    public Route() {
-        points = FileParser.parseFromCsvFile("location-data.csv");
+    private Route(List<Point> points) {
+        this.points = List.copyOf(points);
+    }
+
+    public static Route of(List<Point> points) {
+        return new Route(points);
     }
 
     public Point getSinglePoint(int position) {

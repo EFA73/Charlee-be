@@ -13,3 +13,6 @@ spring:
     username: ${MYSQL_USER}
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+collector:
+  url: http://localhost:8080/collector
