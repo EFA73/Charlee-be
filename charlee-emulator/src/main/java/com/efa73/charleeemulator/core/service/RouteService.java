@@ -1,6 +1,7 @@
 package com.efa73.charleeemulator.core.service;
 
 import com.efa73.charleeemulator.core.domain.Route;
+import com.efa73.charleeemulator.core.domain.Routes;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,13 +12,13 @@ import java.util.List;
  */
 @Service
 public class RouteService {
-    private final List<Route> routes = new ArrayList<>();
+    private final List<Route> routeStorage = new ArrayList<>();
 
     public void addRoute(Route route) {
-        routes.add(route);
+        routeStorage.add(route);
     }
 
-    public List<Route> getRoutes() {
-        return routes;
+    public Routes getRoutes() {
+        return Routes.of(routeStorage);
     }
 }
