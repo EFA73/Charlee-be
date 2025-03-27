@@ -24,7 +24,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    //    private static final String NO_CHECK_URL = "/login";
     private static final Map<String, List<String>> NO_CHECK_METHODS = Map.of(
             "/api/login", List.of("POST"),
             "/api/register", List.of("POST"),
@@ -44,10 +43,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String method = request.getMethod();
 
         // jwt 검증하지 않는 요청 처리
-//        if (request.getRequestURI().equals(NO_CHECK_URL)) {
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
         if (NO_CHECK_METHODS.entrySet().stream()
                 .anyMatch(entry -> requestURI.startsWith(entry.getKey()) && entry.getValue().contains(method))) {
             filterChain.doFilter(request, response);
@@ -57,12 +52,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String accessToken = jwtTokenProvider.extractAccessToken(request)
                 .orElse(null);
 
-        if (accessToken != null && jwtTokenProvider.isTokenValid(accessToken)) {
-            checkAccessTokenAndAuthentication(request, response, filterChain);
-        }
-
-        if (accessToken == null) {
-            throw new EmptyAccessTokenException();
+        try {
+            if (accessToken != null && jwtTokenProvider.isTokenValid(accessToken)) {
+                checkAccessTokenAndAuthentication(request, response, filterChain);
+            }
+            if (accessToken == null) {
+                throw new EmptyAccessTokenException();
+            }
+        } catch (EmptyAccessTokenException e) {
+            log.info("Token is invalid or expired");
+            handleInvalidTokenException(response, e);
         }
 
 //        String refreshToken = jwtTokenProvider.extractRefreshToken(request)
@@ -78,6 +77,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //        if (refreshToken == null) {
 //            checkAccessTokenAndAuthentication(request, response, filterChain);
 //        }
+    }
+
+    private void handleInvalidTokenException(HttpServletResponse response, EmptyAccessTokenException e)
+            throws IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+//        ExceptionResponse errorResponse = ExceptionResponse.of("Invalid or expired token");
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.writeValue(response.getWriter(), errorResponse);
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                "Invalid or expired token"); // TODO: invalid token 테스트 후 수정 필요
     }
 
     /**
