@@ -8,7 +8,8 @@ public enum CommonErrorCode implements CharleeErrorCode {
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     NOT_FOUND(HttpStatus.NOT_FOUND, "찾을 수 없는 리소스입니다."),
     EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT, "중복된 이메일입니다."),
-    EMPTY_ACCESS_TOKEN(HttpStatus.UNAUTHORIZED, "엑세스 토큰이 비어있습니다.");;
+    EMPTY_ACCESS_TOKEN(HttpStatus.UNAUTHORIZED, "엑세스 토큰이 비어있습니다."),
+    LOGIN_FAILED(HttpStatus.UNAUTHORIZED, "로그인에 실패했습니다.");
 
     private final int httpStatus;
     private final String message;
