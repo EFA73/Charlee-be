@@ -1,8 +1,8 @@
 package com.efa73.charleeweb.config;
 
-import com.efa73.charleeweb.user.domain.entity.Role;
-import com.efa73.charleeweb.user.domain.entity.User;
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
+import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -31,7 +31,7 @@ public class AdminInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (!userRepository.existsByRole(Role.ADMIN)) {
-            User admin = User.of(adminName, adminEmail, passwordEncoder.encode(adminPassword), null,
+            Account admin = Account.of(adminName, adminEmail, passwordEncoder.encode(adminPassword), null,
                     Role.ADMIN);
             userRepository.save(admin);
         }
