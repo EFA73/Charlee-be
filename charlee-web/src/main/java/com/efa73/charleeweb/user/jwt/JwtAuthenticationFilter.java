@@ -64,20 +64,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             log.info("Token is invalid or expired");
             handleInvalidTokenException(response, e);
         }
-
-//        String refreshToken = jwtTokenProvider.extractRefreshToken(request)
-//                .filter(jwtTokenProvider::isTokenValid)
-//                .orElse(null);
-//
-//        // Refresh token이 요청 헤더에 포함되어 있을 경우 access token 재발급
-//        if (refreshToken != null) {
-//            checkRefreshTokenAndReissueAccessToken(response, refreshToken);
-//            return;
-//        }
-//
-//        if (refreshToken == null) {
-//            checkAccessTokenAndAuthentication(request, response, filterChain);
-//        }
     }
 
     private void handleInvalidTokenException(HttpServletResponse response, CharleeException e)
@@ -86,10 +72,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
-//        ExceptionResponse errorResponse = ExceptionResponse.of("Invalid or expired token");
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.writeValue(response.getWriter(), errorResponse);
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                 "Invalid or expired token"); // TODO: invalid token 테스트 후 수정 필요
     }
@@ -101,7 +83,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                                    FilterChain filterChain) throws ServletException, IOException {
         log.info("call checkAccessTokenAndAuthentication()");
         jwtTokenProvider.extractAccessToken(request)
-//                .filter(jwtTokenProvider::isTokenValid)
+                .filter(jwtTokenProvider::isTokenValid)
                 .ifPresent(accessToken -> {
                     jwtTokenProvider.extractEmail(accessToken)
                             .ifPresent(email -> userRepository.findByEmail(email)
@@ -144,12 +126,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return password.toString();
     }
-
-//    /**
-//     * RefreshToken 검증 후, AccessToken, RefreshToken 재발급
-//     */
-//    private void checkRefreshTokenAndReissueAccessToken(HttpServletResponse response, String refreshToken) {
-//        userRepository.findByRefreshToken(refreshToken)
-//                .ifPresent()
-//    }
 }
