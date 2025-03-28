@@ -1,8 +1,8 @@
 package com.efa73.charleeweb.config;
 
-import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.account.domain.entity.Account;
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
+import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AdminInitializer implements CommandLineRunner {
 
-    private final UserRepository userRepository;
+    private final AccountRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AdminProperties adminProperties;
 

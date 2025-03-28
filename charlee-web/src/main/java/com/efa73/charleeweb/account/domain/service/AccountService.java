@@ -1,10 +1,10 @@
 package com.efa73.charleeweb.account.domain.service;
 
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
-import com.efa73.charleeweb.account.domain.entity.Account;
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
-import com.efa73.charleeweb.account.interfaces.dto.UserRegisterRequest;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserService {
+public class AccountService {
 
-    private final UserRepository userRepository;
+    private final AccountRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Long registerUser(UserRegisterRequest request) {
+    public Long registerUser(RegisterRequest request) {
         validateEmailDuplicate(request.email());
         String rawPassword = generateRandomPassword();
         log.info("register password: {}", rawPassword); //TODO: notifyPassword() 구현 후 삭제

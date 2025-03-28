@@ -5,11 +5,11 @@ import com.efa73.charleeweb.account.domain.entity.Account;
 /**
  * DTO for {@link Account}
  */
-public record UserRegisterResponse(
+public record RegisterResponse(
         Long id
 ) {
 
-    public static UserRegisterResponse of(Long id) {
-        return new UserRegisterResponse(id);
+    public static RegisterResponse of(Long id) {
+        return new RegisterResponse(id);
     }
 }

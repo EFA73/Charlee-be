@@ -2,8 +2,8 @@ package com.efa73.charleeweb.account.domain.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.entity.Role;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 class AccountRepositoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
     @Test
     void Role이_ADMIN인_계정이_존재하면_true_반환() {
         //given
         Account admin = Account.of("admin", "admin@test.com", "testtest", null, Role.ADMIN);
-        userRepository.save(admin);
+        accountRepository.save(admin);
 
         //when
-        boolean exists = userRepository.existsByRole(Role.ADMIN);
+        boolean exists = accountRepository.existsByRole(Role.ADMIN);
 
         //then
         assertThat(exists).isTrue();
@@ -33,7 +33,7 @@ class AccountRepositoryTest {
     @Test
     void Role이_ADMIN인_계정이_존재하지_않으면_false_반환() {
         //when
-        boolean exists = userRepository.existsByRole(Role.ADMIN);
+        boolean exists = accountRepository.existsByRole(Role.ADMIN);
 
         //then
         assertThat(exists).isFalse();
@@ -44,10 +44,10 @@ class AccountRepositoryTest {
         // given
         String email = "user@example.com";
         Account user = Account.of("user", email, "password123", null, Role.USER);
-        userRepository.save(user);
+        accountRepository.save(user);
 
         // when
-        boolean exists = userRepository.existsByEmail(email);
+        boolean exists = accountRepository.existsByEmail(email);
 
         // then
         assertThat(exists).isTrue();
@@ -59,7 +59,7 @@ class AccountRepositoryTest {
         String email = "user@example.com";
 
         // when
-        boolean exists = userRepository.existsByEmail(email);
+        boolean exists = accountRepository.existsByEmail(email);
 
         // then
         assertThat(exists).isFalse();

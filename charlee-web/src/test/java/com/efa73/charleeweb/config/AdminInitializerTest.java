@@ -6,9 +6,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.account.domain.entity.Account;
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
+import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ class AdminInitializerTest {
     @InjectMocks
     private AdminInitializer adminInitializer;
     @Mock
-    private UserRepository userRepository;
+    private AccountRepository userRepository;
     @Mock
     private AdminProperties adminProperties;
     @Mock
