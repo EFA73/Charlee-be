@@ -29,7 +29,6 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             HttpServletRequest request,
             HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-//        super.onAuthenticationSuccess(request, response, authentication);
 
         String email = extractEmail(authentication);
         userRepository.findByEmail(email)
@@ -39,6 +38,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
                             user.getRole().toString(),
                             user.getId()
                     );
+
                     // 헤더에 토큰 설정
                     jwtTokenProvider.addAccessAndRefreshTokenToResponse(response, accessToken);
 
