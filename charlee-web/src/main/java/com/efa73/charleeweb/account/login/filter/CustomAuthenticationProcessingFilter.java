@@ -12,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
-public class CustomAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class CustomAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
     private static final String DEFAULT_LOGIN_REQUEST_URL = "/api/login";
     //    private static final String HTTP_METHOD = "POST";
@@ -22,7 +22,7 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 
     private final ObjectMapper objectMapper;
 
-    public CustomAuthenticationFilter(ObjectMapper objectMapper) {
+    public CustomAuthenticationProcessingFilter(ObjectMapper objectMapper) {
         super(DEFAULT_LOGIN_REQUEST_URL);
         this.objectMapper = objectMapper;
     }

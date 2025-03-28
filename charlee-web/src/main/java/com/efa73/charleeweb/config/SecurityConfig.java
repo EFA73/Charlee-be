@@ -3,7 +3,7 @@ package com.efa73.charleeweb.config;
 import com.efa73.charleeweb.account.domain.repository.AccountRepository;
 import com.efa73.charleeweb.account.jwt.JwtAuthenticationFilter;
 import com.efa73.charleeweb.account.jwt.JwtTokenProvider;
-import com.efa73.charleeweb.account.login.filter.CustomAuthenticationFilter;
+import com.efa73.charleeweb.account.login.filter.CustomAuthenticationProcessingFilter;
 import com.efa73.charleeweb.account.login.handler.LoginFailureHandler;
 import com.efa73.charleeweb.account.login.handler.LoginSuccessHandler;
 import com.efa73.charleeweb.account.login.service.CustomUserDetailsService;
@@ -44,7 +44,7 @@ public class SecurityConfig {
                 )
                 .addFilterAfter(customJsonUsernamePasswordAuthenticationFilter(), LogoutFilter.class)
                 .addFilterBefore(jwtAuthenticationProcessingFilter(),
-                        CustomAuthenticationFilter.class
+                        CustomAuthenticationProcessingFilter.class
                 )
         ;
         return http.build();
@@ -57,12 +57,12 @@ public class SecurityConfig {
 
     @Bean
     public Filter customJsonUsernamePasswordAuthenticationFilter() {
-        CustomAuthenticationFilter customAuthenticationFilter
-                = new CustomAuthenticationFilter(objectMapper);
-        customAuthenticationFilter.setAuthenticationManager(authenticationManager());
-        customAuthenticationFilter.setAuthenticationSuccessHandler(loginSuccessHandler());
-        customAuthenticationFilter.setAuthenticationFailureHandler(loginFailureHandler());
-        return customAuthenticationFilter;
+        CustomAuthenticationProcessingFilter customAuthenticationProcessingFilter
+                = new CustomAuthenticationProcessingFilter(objectMapper);
+        customAuthenticationProcessingFilter.setAuthenticationManager(authenticationManager());
+        customAuthenticationProcessingFilter.setAuthenticationSuccessHandler(loginSuccessHandler());
+        customAuthenticationProcessingFilter.setAuthenticationFailureHandler(loginFailureHandler());
+        return customAuthenticationProcessingFilter;
     }
 
     @Bean
