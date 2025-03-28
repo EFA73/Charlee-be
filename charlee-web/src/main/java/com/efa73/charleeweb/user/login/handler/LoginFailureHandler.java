@@ -1,6 +1,7 @@
 package com.efa73.charleeweb.user.login.handler;
 
 import com.efa73.charleeweb.common.dto.ExceptionResponse;
+import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
             AuthenticationException exception) throws IOException, ServletException {
         ResponseEntity<ExceptionResponse> errorResponse =
                 ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(ExceptionResponse.of("User not found"));
+                        .body(ExceptionResponse.of(CommonErrorCode.LOGIN_FAILED));
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
