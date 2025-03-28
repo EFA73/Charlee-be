@@ -3,7 +3,7 @@ package com.efa73.charleeweb.user.login.handler;
 import com.efa73.charleeweb.common.dto.Api;
 import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.efa73.charleeweb.user.interfaces.dto.LoginResponse;
-import com.efa73.charleeweb.util.JwtTokenProvider;
+import com.efa73.charleeweb.user.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
