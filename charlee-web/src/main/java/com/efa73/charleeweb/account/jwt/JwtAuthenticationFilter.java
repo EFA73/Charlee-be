@@ -1,9 +1,9 @@
-package com.efa73.charleeweb.user.jwt;
+package com.efa73.charleeweb.account.jwt;
 
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
-import com.efa73.charleeweb.user.domain.entity.User;
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -98,7 +98,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
      * AccessToken 인증 성공 이후, 해당 객체를 SecurityCntextHolder에 담아 인증 처리
      */
-    private void saveAuthentication(User user) {
+    private void saveAuthentication(Account user) {
         String password = user.getPassword();
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()

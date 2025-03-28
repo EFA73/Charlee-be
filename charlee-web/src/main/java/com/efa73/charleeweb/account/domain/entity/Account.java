@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.user.domain.entity;
+package com.efa73.charleeweb.account.domain.entity;
 
 import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.common.Common;

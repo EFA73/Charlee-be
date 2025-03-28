@@ -1,12 +1,12 @@
 package com.efa73.charleeweb.config;
 
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
-import com.efa73.charleeweb.user.jwt.JwtAuthenticationFilter;
-import com.efa73.charleeweb.user.jwt.JwtTokenProvider;
-import com.efa73.charleeweb.user.login.filter.CustomAuthenticationFilter;
-import com.efa73.charleeweb.user.login.handler.LoginFailureHandler;
-import com.efa73.charleeweb.user.login.handler.LoginSuccessHandler;
-import com.efa73.charleeweb.user.login.service.CustomUserDetailsService;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
+import com.efa73.charleeweb.account.jwt.JwtAuthenticationFilter;
+import com.efa73.charleeweb.account.jwt.JwtTokenProvider;
+import com.efa73.charleeweb.account.login.filter.CustomAuthenticationFilter;
+import com.efa73.charleeweb.account.login.handler.LoginFailureHandler;
+import com.efa73.charleeweb.account.login.handler.LoginSuccessHandler;
+import com.efa73.charleeweb.account.login.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;

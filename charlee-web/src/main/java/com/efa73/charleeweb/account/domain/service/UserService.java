@@ -1,10 +1,10 @@
-package com.efa73.charleeweb.user.domain.service;
+package com.efa73.charleeweb.account.domain.service;
 
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
-import com.efa73.charleeweb.user.domain.entity.User;
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
-import com.efa73.charleeweb.user.interfaces.dto.UserRegisterRequest;
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
+import com.efa73.charleeweb.account.interfaces.dto.UserRegisterRequest;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,17 +26,17 @@ public class UserService {
         validateEmailDuplicate(request.email());
         String rawPassword = generateRandomPassword();
         log.info("register password: {}", rawPassword); //TODO: notifyPassword() 구현 후 삭제
-        User user = User.of(
+        Account user = Account.of(
                 request.name(),
                 request.email(),
                 passwordEncoder.encode(rawPassword),
                 request.phone(),
                 request.role()
         );
-        User savedUser = userRepository.save(user);
+        Account savedAccount = userRepository.save(user);
 //        notifyPassword(); //TODO: 새 유저에게 패스워드 알려주는 기능 필요
 //        return user.getId(); //TODO: 질문
-        return savedUser.getId();
+        return savedAccount.getId();
     }
 
     private void validateEmailDuplicate(String email) {

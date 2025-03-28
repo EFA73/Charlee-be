@@ -1,6 +1,6 @@
-package com.efa73.charleeweb.user.login.filter;
+package com.efa73.charleeweb.account.login.filter;
 
-import com.efa73.charleeweb.user.interfaces.dto.LoginRequest;
+import com.efa73.charleeweb.account.interfaces.dto.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
