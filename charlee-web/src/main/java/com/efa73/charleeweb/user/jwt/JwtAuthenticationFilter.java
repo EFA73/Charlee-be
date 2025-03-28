@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.util;
+package com.efa73.charleeweb.user.jwt;
 
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
