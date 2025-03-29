@@ -4,8 +4,8 @@ import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
-import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,30 +13,32 @@ import org.springframework.stereotype.Service;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public Company createCompany(Company company) {
+    public Company createCompany(String email, String password, String name) {
+        String encodedPassword = passwordEncoder.encode(password);
+        Company company = Company.createEntity(email, encodedPassword, name);
 
         return companyRepository.save(company);
     }
 
     public Company getCompany(Long companyId) {
-
         return findCompany(companyId);
     }
 
-    public Company updateCompany(CompanyCreateRequest companyCreateRequest, Long companyId) {
+    public Company updateCompany(Long companyId, String email, String password, String name) {
+        String encodedPassword = passwordEncoder.encode(password);
 
-        var company = findCompany(companyId);
+        var foundCompany = findCompany(companyId);
 
-        company.updateEntity(companyCreateRequest.name());
+        foundCompany.updateEntity(email, encodedPassword, name);
 
-        return companyRepository.save(company);
+        return companyRepository.save(foundCompany);
     }
 
     public void deleteCompany(Long companyId) {
-
         existsCompany(companyId);
-        
+
         companyRepository.deleteById(companyId);
     }
 
