@@ -1,7 +1,6 @@
 package com.efa73.charleeweb.company.domain.entity;
 
 import com.efa73.charleeweb.account.domain.entity.Account;
-import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.common.Common;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,9 +36,7 @@ public class Company extends Common {
         this.account = account;
     }
 
-    public static Company createEntity(String email, String password, String name) {
-        Account account = Account.createEntity(email, password, Role.COMPANY);
-
+    public static Company createEntity(String name, Account account) {
         return new Company(name, account);
     }
 

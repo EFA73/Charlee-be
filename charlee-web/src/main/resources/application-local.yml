@@ -3,12 +3,11 @@ spring:
     activate:
       on-profile: local
     import:
-      #      - optional:file:.env[.properties] #TODO: .env 경로를 실행 위치에서 찾음. 경로 미확정
       - optional:classpath:.env[.properties]
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

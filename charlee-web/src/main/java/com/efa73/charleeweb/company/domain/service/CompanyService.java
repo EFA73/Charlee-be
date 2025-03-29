@@ -1,9 +1,13 @@
 package com.efa73.charleeweb.company.domain.service;
 
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.service.AccountService;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,11 +17,14 @@ import org.springframework.stereotype.Service;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public Company createCompany(String email, String password, String name) {
         String encodedPassword = passwordEncoder.encode(password);
-        Company company = Company.createEntity(email, encodedPassword, name);
+        Account account = accountService.create(email, encodedPassword, Role.COMPANY);
+        Company company = Company.createEntity(name, account);
 
         return companyRepository.save(company);
     }

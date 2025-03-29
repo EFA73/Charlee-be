@@ -1,0 +1,27 @@
+== Create Company API
+
+이 엔드포인트는 새 업체를 생성합니다.
+
+.Request Body
+include::{snippets}/create-company/curl-request.adoc[]
+include::{snippets}/create-company/httpie-request.adoc[]
+include::{snippets}/create-company/http-request.adoc[]
+include::{snippets}/create-company/request-fields.adoc[]
+
+.Response Body
+include::{snippets}/create-company/http-response.adoc[]
+include::{snippets}/create-company/response-body.adoc[]
+
+== Get Company API
+
+이 엔드포인트는 업체의 정보를 조회합니다.
+
+.Request Body
+include::{snippets}/get-company/curl-request.adoc[]
+include::{snippets}/get-company/httpie-request.adoc[]
+include::{snippets}/get-company/http-request.adoc[]
+include::{snippets}/get-company/path-parameters.adoc[]
+
+.Response Body
+include::{snippets}/get-company/http-response.adoc[]
+include::{snippets}/get-company/response-body.adoc[]
