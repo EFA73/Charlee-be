@@ -26,17 +26,13 @@ public class Company extends Common {
     @Column(nullable = false)
     private String name;
 
-    private String siteLink;
-
-    public static Company createEntity(String name, String siteLink) {
+    public static Company createEntity(String name) {
         Company company = new Company();
         company.name = name;
-        company.siteLink = siteLink;
         return company;
     }
 
-    public void updateEntity(String name, String siteLink) {
+    public void updateEntity(String name) {
         this.name = name;
-        this.siteLink = siteLink;
     }
 }

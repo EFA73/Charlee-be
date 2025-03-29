@@ -3,7 +3,7 @@ package com.efa73.charleeweb.company.interfaces.controller;
 import com.efa73.charleeweb.common.Api;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.service.CompanyService;
-import com.efa73.charleeweb.company.interfaces.dto.request.CompanyRequest;
+import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
 import com.efa73.charleeweb.company.interfaces.dto.response.CompanyResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +25,9 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping("")
-    public ResponseEntity<Api<CompanyResponse>> createCompany(@RequestBody CompanyRequest companyRequest) {
+    public ResponseEntity<Api<CompanyResponse>> createCompany(@RequestBody CompanyCreateRequest companyCreateRequest) {
 
-        Company company = companyService.createCompany(CompanyRequest.createEntity(companyRequest));
+        Company company = companyService.createCompany(CompanyCreateRequest.createEntity(companyCreateRequest));
 
         CompanyResponse response = CompanyResponse.createDto(company);
 
@@ -47,9 +47,10 @@ public class CompanyController {
     }
 
     @PutMapping("/{companyId}")
-    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyRequest companyRequest,
+    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyCreateRequest companyCreateRequest,
                                                               @PathVariable Long companyId) {
-        Company updatedCompany = companyService.updateCompany(companyRequest, companyId);
+
+        Company updatedCompany = companyService.updateCompany(companyCreateRequest, companyId);
 
         CompanyResponse response = CompanyResponse.createDto(updatedCompany);
 

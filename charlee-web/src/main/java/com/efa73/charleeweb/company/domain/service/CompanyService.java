@@ -4,7 +4,7 @@ import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
-import com.efa73.charleeweb.company.interfaces.dto.request.CompanyRequest;
+import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,25 +21,33 @@ public class CompanyService {
 
     public Company getCompany(Long companyId) {
 
-        return companyRepository.findById(companyId)
-                .orElseThrow(() -> new CharleeException(CommonErrorCode.NOT_FOUND));
+        return findCompany(companyId);
     }
 
-    public Company updateCompany(CompanyRequest companyRequest, Long companyId) {
+    public Company updateCompany(CompanyCreateRequest companyCreateRequest, Long companyId) {
 
-        var company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new CharleeException(CommonErrorCode.NOT_FOUND));
+        var company = findCompany(companyId);
 
-        company.updateEntity(companyRequest.name(), companyRequest.siteLink());
+        company.updateEntity(companyCreateRequest.name());
 
         return companyRepository.save(company);
     }
 
     public void deleteCompany(Long companyId) {
 
+        existsCompany(companyId);
+        
+        companyRepository.deleteById(companyId);
+    }
+
+    private Company findCompany(Long companyId) {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new CharleeException(CommonErrorCode.NOT_FOUND));
+    }
+
+    private void existsCompany(Long companyId) {
         if (!companyRepository.existsById(companyId)) {
             throw new CharleeException(CommonErrorCode.NOT_FOUND);
         }
-        companyRepository.deleteById(companyId);
     }
 }
