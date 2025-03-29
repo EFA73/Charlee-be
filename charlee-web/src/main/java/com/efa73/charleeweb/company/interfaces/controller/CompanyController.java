@@ -4,6 +4,7 @@ import com.efa73.charleeweb.common.Api;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.service.CompanyService;
 import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
+import com.efa73.charleeweb.company.interfaces.dto.request.CompanyUpdateRequest;
 import com.efa73.charleeweb.company.interfaces.dto.response.CompanyResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,7 @@ public class CompanyController {
     }
 
     @PutMapping("/{companyId}")
-    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyCreateRequest request,
+    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyUpdateRequest request,
                                                               @PathVariable Long companyId) {
         Company updatedCompany = companyService.updateCompany(
                 companyId,

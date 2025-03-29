@@ -452,18 +452,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://docs.api.com:8080/api/company' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -d '{
-  "email" : "testCompany@gmail.com",
-  "password" : "0123456789",
-  "name" : "A rent"
+  "email" : "test@email.com",
+  "password" : "testPassword",
+  "name" : "testCompany"
 }'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ echo '{
-  "email" : "testCompany@gmail.com",
-  "password" : "0123456789",
-  "name" : "A rent"
+  "email" : "test@email.com",
+  "password" : "testPassword",
+  "name" : "testCompany"
 }' | http POST 'https://docs.api.com:8080/api/company' \
     'Content-Type:application/json;charset=UTF-8'</code></pre>
 </div>
@@ -476,9 +476,9 @@ Content-Length: 89
 Host: docs.api.com:8080
 
 {
-  "email" : "testCompany@gmail.com",
-  "password" : "0123456789",
-  "name" : "A rent"
+  "email" : "test@email.com",
+  "password" : "testPassword",
+  "name" : "testCompany"
 }</code></pre>
 </div>
 </div>
@@ -526,14 +526,14 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 33
+Content-Length: 38
 
-{"data":{"id":1,"name":"A rent"}}</code></pre>
+{"data":{"id":1,"name":"testCompany"}}</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-json" data-lang="json">{"data":{"id":1,"name":"A rent"}}</code></pre>
+<pre class="highlight nowrap"><code class="language-json" data-lang="json">{"data":{"id":1,"name":"testCompany"}}</code></pre>
 </div>
 </div>
 </div>
@@ -547,19 +547,19 @@ Content-Length: 33
 <div class="listingblock">
 <div class="title">Request Body</div>
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://docs.api.com:8080/api/company/2' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://docs.api.com:8080/api/company/3' -i -X GET \
     -H 'Content-Type: application/json;charset=UTF-8'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ http GET 'https://docs.api.com:8080/api/company/2' \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ http GET 'https://docs.api.com:8080/api/company/3' \
     'Content-Type:application/json;charset=UTF-8'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/company/2 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/company/3 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: docs.api.com:8080</code></pre>
 </div>
@@ -597,12 +597,85 @@ Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
 Content-Length: 38
 
-{"data":{"id":2,"name":"testCompany"}}</code></pre>
+{"data":{"id":3,"name":"testCompany"}}</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-json" data-lang="json">{"data":{"id":2,"name":"testCompany"}}</code></pre>
+<pre class="highlight nowrap"><code class="language-json" data-lang="json">{"data":{"id":3,"name":"testCompany"}}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update_company_api">Update Company API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>이 엔드포인트는 업체의 정보를 수정합니다.</p>
+</div>
+<div class="listingblock">
+<div class="title">Request Body</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://docs.api.com:8080/api/company/2' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{"email":"update@email.com","password":"updatePassword","name":"updateCompany"}'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo '{"email":"update@email.com","password":"updatePassword","name":"updateCompany"}' | http PUT 'https://docs.api.com:8080/api/company/2' \
+    'Content-Type:application/json;charset=UTF-8'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /api/company/2 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 79
+Host: docs.api.com:8080
+
+{"email":"update@email.com","password":"updatePassword","name":"updateCompany"}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. /api/company/{company_id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>company_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회사의 고유 식별자</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">Response Body</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+Content-Length: 40
+
+{"data":{"id":2,"name":"updateCompany"}}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-json" data-lang="json">{"data":{"id":2,"name":"updateCompany"}}</code></pre>
 </div>
 </div>
 </div>
@@ -611,7 +684,7 @@ Content-Length: 38
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2025-03-29 21:29:25 +0900
+Last updated 2025-03-29 22:13:15 +0900
 </div>
 </div>
 </body>

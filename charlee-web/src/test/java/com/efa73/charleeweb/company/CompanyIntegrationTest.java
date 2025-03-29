@@ -13,7 +13,9 @@ import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
 import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
+import com.efa73.charleeweb.company.interfaces.dto.request.CompanyUpdateRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,9 +58,9 @@ public class CompanyIntegrationTest {
     @Transactional
     void createCompany() throws Exception {
         CompanyCreateRequest request = new CompanyCreateRequest(
-                "testCompany@gmail.com",
-                "0123456789",
-                "A rent"
+                "test@email.com",
+                "testPassword",
+                "testCompany"
         );
 
         String requestBody = objectMapper.writeValueAsString(request);
@@ -104,8 +106,39 @@ public class CompanyIntegrationTest {
     }
 
     @Test
+    @Transactional
     void updateCompany() throws Exception {
+        var saved = companyRepository.save(company);
 
+        CompanyUpdateRequest request = new CompanyUpdateRequest(
+                "update@email.com",
+                "updatePassword",
+                "updateCompany"
+        );
+
+        ObjectNode rootNode = objectMapper.valueToTree(request);
+
+        String requestBody = objectMapper.writeValueAsString(rootNode);
+
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/company/{company_id}", saved.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody)
+        );
+
+        MvcResult result = resultActions.andExpect(status().isOk())
+                .andDo(
+                        MockMvcRestDocumentation.document("update-company",
+                                pathParameters(
+                                        parameterWithName("company_id").description("회사의 고유 식별자")
+                                ),
+                                requestFields(
+                                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                        fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
+                                        fieldWithPath("name").type(JsonFieldType.STRING).description("업체명")
+                                )
+                        ))
+                .andReturn();
     }
 
     @Test

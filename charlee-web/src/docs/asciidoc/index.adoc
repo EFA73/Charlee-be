@@ -25,3 +25,17 @@ include::{snippets}/get-company/path-parameters.adoc[]
 .Response Body
 include::{snippets}/get-company/http-response.adoc[]
 include::{snippets}/get-company/response-body.adoc[]
+
+== Update Company API
+
+이 엔드포인트는 업체의 정보를 수정합니다.
+
+.Request Body
+include::{snippets}/update-company/curl-request.adoc[]
+include::{snippets}/update-company/httpie-request.adoc[]
+include::{snippets}/update-company/http-request.adoc[]
+include::{snippets}/update-company/path-parameters.adoc[]
+
+.Response Body
+include::{snippets}/update-company/http-response.adoc[]
+include::{snippets}/update-company/response-body.adoc[]
