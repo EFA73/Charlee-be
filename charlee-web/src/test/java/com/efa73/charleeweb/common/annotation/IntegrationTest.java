@@ -21,5 +21,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
-public @interface RestDocsTest {
+public @interface IntegrationTest {
 }

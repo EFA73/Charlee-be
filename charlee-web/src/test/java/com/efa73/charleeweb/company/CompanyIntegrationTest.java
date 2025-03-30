@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.efa73.charleeweb.account.domain.entity.Account;
 import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.account.domain.repository.AccountRepository;
-import com.efa73.charleeweb.common.annotation.RestDocsTest;
+import com.efa73.charleeweb.common.annotation.IntegrationTest;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
 import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-@RestDocsTest
+@IntegrationTest
 @Transactional
 public class CompanyIntegrationTest {
 
