@@ -1,15 +1,19 @@
 package com.efa73.charleeweb.company;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.efa73.charleeweb.account.domain.entity.Account;
 import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.repository.CompanyRepository;
 import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
@@ -24,7 +28,6 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -34,6 +37,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "docs.api.com")
+@Transactional
 public class CompanyIntegrationTest {
 
     @Autowired
@@ -43,24 +47,27 @@ public class CompanyIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
     private CompanyRepository companyRepository;
 
-    Account account;
-    Company company;
+    Company savedCompany;
 
     @BeforeEach
     void setUp() {
-        account = Account.createEntity("test@email.com", "testPassword", Role.COMPANY);
-        company = Company.createEntity("testCompany", account);
+        Account account = Account.createEntity("test@email.com", "testPassword", Role.COMPANY);
+        this.savedCompany = Company.createEntity("testCompany", account);
+
+        accountRepository.save(account);
+        this.savedCompany = companyRepository.save(savedCompany);
     }
 
     @Test
-    @Transactional
     void createCompany() throws Exception {
         CompanyCreateRequest request = new CompanyCreateRequest(
-                "test@email.com",
-                "testPassword",
-                "testCompany"
+                "createTest@email.com",
+                "createTestPassword",
+                "createTestCompany"
         );
 
         String requestBody = objectMapper.writeValueAsString(request);
@@ -71,9 +78,14 @@ public class CompanyIntegrationTest {
                         .content(requestBody)
         );
 
-        MvcResult result = resultActions.andExpect(status().isCreated())
+        MvcResult result = resultActions
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.email").value(request.email()))
+                .andExpect(jsonPath("$.data.name").value(request.name()))
                 .andDo(
-                        MockMvcRestDocumentation.document("create-company", preprocessRequest(prettyPrint()),
+                        document("create-company",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
                                 requestFields(
                                         fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                                         fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
@@ -84,20 +96,22 @@ public class CompanyIntegrationTest {
     }
 
     @Test
-    @Transactional
     void getCompany() throws Exception {
-        var saved = companyRepository.save(company);
-
-        Long companyId = saved.getId();
+        Long companyId = savedCompany.getId();
 
         ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/company/{company_id}", companyId)
                         .contentType(MediaType.APPLICATION_JSON)
         );
 
-        MvcResult result = resultActions.andExpect(status().isOk())
+        MvcResult result = resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.email").value(savedCompany.getAccount().getEmail()))
+                .andExpect(jsonPath("$.data.name").value(savedCompany.getName()))
                 .andDo(
-                        MockMvcRestDocumentation.document("get-company",
+                        document("get-company",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
                                 pathParameters(
                                         parameterWithName("company_id").description("회사의 고유 식별자")
                                 )
@@ -106,10 +120,7 @@ public class CompanyIntegrationTest {
     }
 
     @Test
-    @Transactional
     void updateCompany() throws Exception {
-        var saved = companyRepository.save(company);
-
         CompanyUpdateRequest request = new CompanyUpdateRequest(
                 "update@email.com",
                 "updatePassword",
@@ -121,14 +132,19 @@ public class CompanyIntegrationTest {
         String requestBody = objectMapper.writeValueAsString(rootNode);
 
         ResultActions resultActions = mockMvc.perform(
-                MockMvcRequestBuilders.put("/api/company/{company_id}", saved.getId())
+                MockMvcRequestBuilders.put("/api/company/{company_id}", savedCompany.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody)
         );
 
-        MvcResult result = resultActions.andExpect(status().isOk())
+        MvcResult result = resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.email").value("update@email.com"))
+                .andExpect(jsonPath("$.data.name").value("updateCompany"))
                 .andDo(
-                        MockMvcRestDocumentation.document("update-company",
+                        document("update-company",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
                                 pathParameters(
                                         parameterWithName("company_id").description("회사의 고유 식별자")
                                 ),
@@ -139,9 +155,28 @@ public class CompanyIntegrationTest {
                                 )
                         ))
                 .andReturn();
+
     }
 
     @Test
-    void deleteCompany() {
+    void deleteCompany() throws Exception {
+        Long companyId = savedCompany.getId();
+
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/company/{company_id}", companyId)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        MvcResult result = resultActions
+                .andExpect(status().isNoContent())
+                .andDo(
+                        document("delete-company",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                pathParameters(
+                                        parameterWithName("company_id").description("회사의 고유 식별자")
+                                )
+                        ))
+                .andReturn();
     }
 }
