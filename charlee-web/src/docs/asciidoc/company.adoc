@@ -1,0 +1,47 @@
+== Create Company API
+
+새 업체를 생성합니다.
+
+.Request
+include::{snippets}/create-company/http-request.adoc[]
+include::{snippets}/create-company/request-fields.adoc[]
+
+.Response
+include::{snippets}/create-company/http-response.adoc[]
+include::{snippets}/create-company/response-fields.adoc[]
+
+== Get Company API
+
+업체의 상세 정보를 조회합니다.
+
+.Request Body
+include::{snippets}/get-company/http-request.adoc[]
+include::{snippets}/get-company/path-parameters.adoc[]
+
+.Response Body
+include::{snippets}/get-company/http-response.adoc[]
+include::{snippets}/get-company/response-fields.adoc[]
+
+== Update Company API
+
+업체의 정보를 수정합니다.
+
+.Request Body
+include::{snippets}/update-company/http-request.adoc[]
+include::{snippets}/update-company/path-parameters.adoc[]
+include::{snippets}/update-company/request-fields.adoc[]
+
+.Response Body
+include::{snippets}/update-company/http-response.adoc[]
+include::{snippets}/update-company/response-fields.adoc[]
+
+== Delete Company API
+
+업체의 정보를 삭제합니다.
+
+.Request Body
+include::{snippets}/delete-company/http-request.adoc[]
+include::{snippets}/delete-company/path-parameters.adoc[]
+
+.Response Body
+include::{snippets}/delete-company/http-response.adoc[]
