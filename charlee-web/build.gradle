@@ -31,8 +31,11 @@ dependencies {
 }
 
 asciidoctor {
+    baseDirFollowsSourceDir()
     configurations "asciidoctorExt"
+
     dependsOn test
+
     doLast {
         copy {
             from file("build/docs/asciidoc")
