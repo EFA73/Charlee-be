@@ -2,12 +2,8 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
-asciidoctor {
-    attributes 'snippets': file("build/generated-snippets")
-    sources {
-        // 예를 들어, src/docs/asciidoc 폴더 내의 index.adoc 파일을 문서 소스로 사용
-        include 'index.adoc'
-    }
+configurations {
+    asciidoctorExt
 }
 
 dependencies {
@@ -31,9 +27,22 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+}
+
+asciidoctor {
+    configurations "asciidoctorExt"
+    dependsOn test
+    doLast {
+        copy {
+            from file("build/docs/asciidoc")
+            into file("src/main/resources/static")
+        }
+    }
 }
 
 bootJar {
+    dependsOn asciidoctor
     enabled = true
 }
 
