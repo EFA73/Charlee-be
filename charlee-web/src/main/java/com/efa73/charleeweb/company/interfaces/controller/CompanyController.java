@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.company.interfaces.controller;
 
-import com.efa73.charleeweb.common.dto.Api;
+import com.efa73.charleeweb.common.Api;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.service.CompanyService;
 import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;

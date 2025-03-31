@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.user.login.handler;
 
-import com.efa73.charleeweb.common.dto.Api;
+import com.efa73.charleeweb.common.Api;
 import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.efa73.charleeweb.user.interfaces.dto.LoginResponse;
 import com.efa73.charleeweb.user.jwt.JwtTokenProvider;

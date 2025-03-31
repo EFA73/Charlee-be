@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.user.login.handler;
 
-import com.efa73.charleeweb.common.dto.ExceptionResponse;
+import com.efa73.charleeweb.common.exception.ExceptionResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

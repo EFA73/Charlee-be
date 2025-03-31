@@ -1,6 +1,5 @@
 package com.efa73.charleeweb.common.exception;
 
-import com.efa73.charleeweb.common.dto.ExceptionResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

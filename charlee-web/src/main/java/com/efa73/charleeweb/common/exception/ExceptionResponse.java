@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.common.dto;
+package com.efa73.charleeweb.common.exception;
 
 import org.springframework.lang.Nullable;
 

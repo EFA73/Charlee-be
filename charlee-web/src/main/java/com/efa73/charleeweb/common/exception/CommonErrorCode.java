@@ -22,4 +22,5 @@ public enum CommonErrorCode implements CharleeErrorCode {
         this.httpStatus = httpStatus;
         this.message = message;
     }
+
 }
