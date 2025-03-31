@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 public class CustomAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
     private static final String DEFAULT_LOGIN_REQUEST_URL = "/api/login";
-    private static final String CONTENT_TYPE = "application/json";
 
     private final ObjectMapper objectMapper;
 
@@ -27,9 +26,10 @@ public class CustomAuthenticationProcessingFilter extends AbstractAuthentication
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        if (request.getContentType() == null || !request.getContentType().equals(CONTENT_TYPE)) {
+        // 요청의 유효성 검사
+        if (request.getContentType() == null) {
             throw new AuthenticationServiceException(
-                    "Authentication Content-Type not supported: " + request.getContentType());
+                    "Authentication Content-Type is null: " + request.getContentType());
         }
 
         LoginRequest loginRequest = objectMapper.readValue(request.getInputStream(), LoginRequest.class);
