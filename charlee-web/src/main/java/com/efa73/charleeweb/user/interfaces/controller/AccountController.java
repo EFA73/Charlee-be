@@ -1,9 +1,9 @@
-package com.efa73.charleeweb.account.interfaces.controller;
+package com.efa73.charleeweb.user.interfaces.controller;
 
-import com.efa73.charleeweb.account.domain.service.UserService;
-import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
-import com.efa73.charleeweb.account.interfaces.dto.RegisterResponse;
 import com.efa73.charleeweb.common.dto.Api;
+import com.efa73.charleeweb.user.domain.service.UserService;
+import com.efa73.charleeweb.user.interfaces.dto.RegisterRequest;
+import com.efa73.charleeweb.user.interfaces.dto.RegisterResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

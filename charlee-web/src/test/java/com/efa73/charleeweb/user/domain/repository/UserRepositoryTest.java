@@ -1,9 +1,9 @@
-package com.efa73.charleeweb.account.domain.repository;
+package com.efa73.charleeweb.user.domain.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.efa73.charleeweb.account.domain.entity.Role;
-import com.efa73.charleeweb.account.domain.entity.User;
+import com.efa73.charleeweb.user.domain.entity.Role;
+import com.efa73.charleeweb.user.domain.entity.User;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

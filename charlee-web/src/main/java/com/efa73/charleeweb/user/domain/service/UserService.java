@@ -1,10 +1,10 @@
-package com.efa73.charleeweb.account.domain.service;
+package com.efa73.charleeweb.user.domain.service;
 
-import com.efa73.charleeweb.account.domain.entity.User;
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
-import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
+import com.efa73.charleeweb.user.domain.entity.User;
+import com.efa73.charleeweb.user.domain.repository.UserRepository;
+import com.efa73.charleeweb.user.interfaces.dto.RegisterRequest;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -6,9 +6,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import com.efa73.charleeweb.account.domain.entity.Role;
-import com.efa73.charleeweb.account.domain.entity.User;
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
+import com.efa73.charleeweb.user.domain.entity.Role;
+import com.efa73.charleeweb.user.domain.entity.User;
+import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

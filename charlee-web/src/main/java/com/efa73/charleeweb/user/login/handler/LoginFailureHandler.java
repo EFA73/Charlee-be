@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.account.login.handler;
+package com.efa73.charleeweb.user.login.handler;
 
 import com.efa73.charleeweb.common.dto.ExceptionResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,9 +1,9 @@
-package com.efa73.charleeweb.account.login.handler;
+package com.efa73.charleeweb.user.login.handler;
 
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
-import com.efa73.charleeweb.account.interfaces.dto.LoginResponse;
-import com.efa73.charleeweb.account.jwt.JwtTokenProvider;
 import com.efa73.charleeweb.common.dto.Api;
+import com.efa73.charleeweb.user.domain.repository.UserRepository;
+import com.efa73.charleeweb.user.interfaces.dto.LoginResponse;
+import com.efa73.charleeweb.user.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,7 +56,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
                     }
                 });
     }
-    
+
     private String extractEmail(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return userDetails.getUsername();

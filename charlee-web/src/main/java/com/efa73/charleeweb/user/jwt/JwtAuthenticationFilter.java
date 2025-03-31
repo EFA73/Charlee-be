@@ -1,10 +1,10 @@
-package com.efa73.charleeweb.account.jwt;
+package com.efa73.charleeweb.user.jwt;
 
-import com.efa73.charleeweb.account.domain.entity.User;
-import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import com.efa73.charleeweb.common.dto.ExceptionResponse;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
+import com.efa73.charleeweb.user.domain.entity.User;
+import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

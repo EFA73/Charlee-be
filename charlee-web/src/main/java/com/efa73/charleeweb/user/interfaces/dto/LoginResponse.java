@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.account.interfaces.dto;
+package com.efa73.charleeweb.user.interfaces.dto;
 
 public record LoginResponse(
         String email

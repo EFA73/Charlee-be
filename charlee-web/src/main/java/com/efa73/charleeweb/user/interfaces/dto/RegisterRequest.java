@@ -1,7 +1,7 @@
-package com.efa73.charleeweb.account.interfaces.dto;
+package com.efa73.charleeweb.user.interfaces.dto;
 
-import com.efa73.charleeweb.account.domain.entity.Role;
-import com.efa73.charleeweb.account.domain.entity.User;
+import com.efa73.charleeweb.user.domain.entity.Role;
+import com.efa73.charleeweb.user.domain.entity.User;
 
 /**
  * DTO for {@link User}
