@@ -38,9 +38,10 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/register", "/api/login").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                                .requestMatchers("/api/register", "/api/login").permitAll()
+//                        .anyRequest().authenticated() // TODO: 나중에 인증 필요로 변경
+                                .anyRequest().permitAll()
                 )
                 .addFilterAfter(customAuthenticationProcessingFilter(), LogoutFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter(),

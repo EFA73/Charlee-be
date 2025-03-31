@@ -56,8 +56,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
                     }
                 });
     }
-
-
+    
     private String extractEmail(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return userDetails.getUsername();
