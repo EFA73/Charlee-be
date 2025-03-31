@@ -40,7 +40,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
                     );
 
                     // 헤더에 토큰 설정
-                    jwtTokenProvider.addAccessAndRefreshTokenToResponse(response, accessToken);
+                    jwtTokenProvider.addAccessTokenToResponse(response, accessToken);
 
                     ResponseEntity<Api<LoginResponse>> loginResponse = ResponseEntity.ok()
                             .body(Api.of(LoginResponse.of(email)));
