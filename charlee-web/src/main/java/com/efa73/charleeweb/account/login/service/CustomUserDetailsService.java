@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.account.login.service;
 
-import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final AccountRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

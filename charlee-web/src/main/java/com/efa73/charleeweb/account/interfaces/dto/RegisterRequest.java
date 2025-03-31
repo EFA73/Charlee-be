@@ -1,10 +1,10 @@
 package com.efa73.charleeweb.account.interfaces.dto;
 
-import com.efa73.charleeweb.account.domain.entity.Account;
 import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.entity.User;
 
 /**
- * DTO for {@link Account}
+ * DTO for {@link User}
  */
 public record RegisterRequest(
         String name,
@@ -17,7 +17,7 @@ public record RegisterRequest(
         return new RegisterRequest(name, email, phone, role);
     }
 
-    public static RegisterRequest from(Account user) {
+    public static RegisterRequest from(User user) {
         return new RegisterRequest(
                 user.getEmail(),
                 user.getName(),

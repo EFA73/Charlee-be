@@ -2,8 +2,8 @@ package com.efa73.charleeweb.account.domain.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.efa73.charleeweb.account.domain.entity.Account;
 import com.efa73.charleeweb.account.domain.entity.Role;
+import com.efa73.charleeweb.account.domain.entity.User;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,19 +13,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class AccountRepositoryTest {
+class UserRepositoryTest {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @Test
     void Role이_ADMIN인_계정이_존재하면_true_반환() {
         //given
-        Account admin = Account.of("admin", "admin@test.com", "testtest", null, Role.ADMIN);
-        accountRepository.save(admin);
+        User admin = User.of("admin", "admin@test.com", "testtest", null, Role.ADMIN);
+        userRepository.save(admin);
 
         //when
-        boolean exists = accountRepository.existsByRole(Role.ADMIN);
+        boolean exists = userRepository.existsByRole(Role.ADMIN);
 
         //then
         assertThat(exists).isTrue();
@@ -34,7 +34,7 @@ class AccountRepositoryTest {
     @Test
     void Role이_ADMIN인_계정이_존재하지_않으면_false_반환() {
         //when
-        boolean exists = accountRepository.existsByRole(Role.ADMIN);
+        boolean exists = userRepository.existsByRole(Role.ADMIN);
 
         //then
         assertThat(exists).isFalse();
@@ -44,11 +44,11 @@ class AccountRepositoryTest {
     void 이메일이_존재하면_true_반환() {
         // given
         String email = "user@example.com";
-        Account user = Account.of("user", email, "password123", null, Role.USER);
-        accountRepository.save(user);
+        User user = User.of("user", email, "password123", null, Role.USER);
+        userRepository.save(user);
 
         // when
-        boolean exists = accountRepository.existsByEmail(email);
+        boolean exists = userRepository.existsByEmail(email);
 
         // then
         assertThat(exists).isTrue();
@@ -60,7 +60,7 @@ class AccountRepositoryTest {
         String email = "user@example.com";
 
         // when
-        boolean exists = accountRepository.existsByEmail(email);
+        boolean exists = userRepository.existsByEmail(email);
 
         // then
         assertThat(exists).isFalse();
@@ -70,11 +70,11 @@ class AccountRepositoryTest {
     void 이메일로_계정을_찾을_수_있다() {
         // given
         String email = "user@example.com";
-        Account user = Account.of("user", email, "password123", null, Role.COMPANY);
-        accountRepository.save(user);
+        User user = User.of("user", email, "password123", null, Role.COMPANY);
+        userRepository.save(user);
 
         // when
-        Optional<Account> foundAccount = accountRepository.findByEmail(email);
+        Optional<User> foundAccount = userRepository.findByEmail(email);
 
         // then
         assertThat(foundAccount).isPresent();
@@ -87,7 +87,7 @@ class AccountRepositoryTest {
         String email = "nonexistent@example.com";
 
         // when
-        Optional<Account> foundAccount = accountRepository.findByEmail(email);
+        Optional<User> foundAccount = userRepository.findByEmail(email);
 
         // then
         assertThat(foundAccount).isNotPresent();

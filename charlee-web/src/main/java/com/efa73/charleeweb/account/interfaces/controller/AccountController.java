@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.account.interfaces.controller;
 
-import com.efa73.charleeweb.account.domain.service.AccountService;
+import com.efa73.charleeweb.account.domain.service.UserService;
 import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
 import com.efa73.charleeweb.account.interfaces.dto.RegisterResponse;
 import com.efa73.charleeweb.common.dto.Api;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountController {
 
-    private final AccountService accountService;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<Api<RegisterResponse>> registerUser(
             @RequestBody RegisterRequest userRegisterDto
     ) {
-        Long userId = accountService.registerUser(userRegisterDto);
+        Long userId = userService.registerUser(userRegisterDto);
         Api<RegisterResponse> userRegisterResponseApi = Api.of(RegisterResponse.of(userId));
         return ResponseEntity.created(URI.create("/api/user/" + userId)).body(userRegisterResponseApi);
     }

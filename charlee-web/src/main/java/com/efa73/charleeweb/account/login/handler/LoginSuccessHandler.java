@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.account.login.handler;
 
-import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import com.efa73.charleeweb.account.interfaces.dto.LoginResponse;
 import com.efa73.charleeweb.account.jwt.JwtTokenProvider;
 import com.efa73.charleeweb.common.dto.Api;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final AccountRepository userRepository;
+    private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
 
     @Override

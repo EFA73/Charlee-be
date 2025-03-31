@@ -1,6 +1,6 @@
 package com.efa73.charleeweb.config;
 
-import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import com.efa73.charleeweb.account.jwt.JwtAuthenticationFilter;
 import com.efa73.charleeweb.account.jwt.JwtTokenProvider;
 import com.efa73.charleeweb.account.login.filter.CustomAuthenticationProcessingFilter;
@@ -31,7 +31,7 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService customUserDetailsService;
     private final ObjectMapper objectMapper;
-    private final AccountRepository userRepository;
+    private final UserRepository userRepository;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

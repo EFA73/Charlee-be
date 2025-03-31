@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Account extends Common {
+public class User extends Common {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +37,11 @@ public class Account extends Common {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static Account of(String name, String email, String password, String phone, Role role) {
-        return new Account(name, email, password, phone, role);
+    public static User of(String name, String email, String password, String phone, Role role) {
+        return new User(name, email, password, phone, role);
     }
 
-    private Account(String name, String email, String password, String phone, Role role) {
+    private User(String name, String email, String password, String phone, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;

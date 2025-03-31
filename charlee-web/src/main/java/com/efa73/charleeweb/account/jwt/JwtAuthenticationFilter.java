@@ -1,7 +1,7 @@
 package com.efa73.charleeweb.account.jwt;
 
-import com.efa73.charleeweb.account.domain.entity.Account;
-import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.domain.entity.User;
+import com.efa73.charleeweb.account.domain.repository.UserRepository;
 import com.efa73.charleeweb.common.dto.ExceptionResponse;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
@@ -21,7 +21,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -37,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     );
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final AccountRepository userRepository;
+    private final UserRepository userRepository;
 
     private final ObjectMapper objectMapper;
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
@@ -105,10 +104,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
      * AccessToken 인증 성공 이후, 해당 객체를 SecurityCntextHolder에 담아 인증 처리
      */
-    private void saveAuthentication(Account user) {
+    private void saveAuthentication(User user) {
         String password = user.getPassword();
 
-        UserDetails userDetails = User.builder()
+        UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())
                 .password(password)
                 .roles(user.getRole().name())

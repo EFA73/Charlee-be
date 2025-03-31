@@ -1,9 +1,9 @@
 package com.efa73.charleeweb.account.interfaces.dto;
 
-import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.entity.User;
 
 /**
- * DTO for {@link Account}
+ * DTO for {@link User}
  */
 public record RegisterResponse(
         Long id
