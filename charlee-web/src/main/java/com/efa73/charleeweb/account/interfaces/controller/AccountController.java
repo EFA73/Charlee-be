@@ -1,7 +1,6 @@
 package com.efa73.charleeweb.account.interfaces.controller;
 
 import com.efa73.charleeweb.account.domain.service.AccountService;
-import com.efa73.charleeweb.account.interfaces.dto.LoginRequest;
 import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
 import com.efa73.charleeweb.account.interfaces.dto.RegisterResponse;
 import com.efa73.charleeweb.common.dto.Api;
@@ -28,12 +27,6 @@ public class AccountController {
     ) {
         Long userId = accountService.registerUser(userRegisterDto);
         Api<RegisterResponse> userRegisterResponseApi = Api.of(RegisterResponse.of(userId));
-        return ResponseEntity.created(URI.create("/user/" + userId)).body(userRegisterResponseApi);
-    }
-
-    @PostMapping("/login")
-    public void loginUser(
-            @RequestBody LoginRequest loginRequest
-    ) {
+        return ResponseEntity.created(URI.create("/api/user/" + userId)).body(userRegisterResponseApi);
     }
 }
