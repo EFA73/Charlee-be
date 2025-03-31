@@ -31,7 +31,6 @@ public class JwtTokenProvider {
     private static final String USER_ID_CLAIM = "userId";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String EMPTY_STRING = "";
-    private static final String MESSAGE = "Access token is invalid."; //TODO: CustomErrorCode
 
     private String secretKey;
     private Long accessTokenExpTime;
@@ -65,33 +64,11 @@ public class JwtTokenProvider {
     }
 
     /**
-     * RefreshToken 생성
-     */
-    public String createRefreshToken() {
-        Date now = new Date();
-        Date expireAt = new Date(now.getTime() + accessTokenExpTime);
-
-        return JWT.create()
-                .withSubject(REFRESH_SUBJECT)
-                .withExpiresAt(expireAt)
-                .sign(Algorithm.HMAC512(secretKey));
-    }
-
-    /**
      * Response header에 AccessToken 넣기
      */
     public void addAccessTokenToResponse(HttpServletResponse response, String accessToken) {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader(accessHeader, accessToken);
-    }
-
-    /**
-     * Response header에 AccessToken, RefreshToken 넣기
-     */
-    public void addAccessAndRefreshTokenToResponse(HttpServletResponse response, String accessToken) {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setHeader(accessHeader, accessToken);
-        response.setHeader(refreshHeader, refreshHeader);
     }
 
     /**
@@ -104,26 +81,10 @@ public class JwtTokenProvider {
     }
 
     /**
-     * Header에서 RefreshToken 추출
-     */
-    public Optional<String> extractRefreshToken(HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader(refreshHeader))
-                .filter(refreshToken -> refreshToken.startsWith(TOKEN_PREFIX))
-                .map(refreshToken -> refreshToken.replace(TOKEN_PREFIX, EMPTY_STRING));
-    }
-
-    /**
      * AccessToken에서 email 추출
      */
     public Optional<String> extractEmail(String accessToken) {
         return extractClaim(accessToken, EMAIL_CLAIM, Claim::asString);
-    }
-
-    /**
-     * AccessToken에서 role 추출
-     */
-    public Optional<String> extractRole(String accessToken) {
-        return extractClaim(accessToken, ROLE_CLAIM, Claim::asString);
     }
 
     /**
@@ -137,13 +98,15 @@ public class JwtTokenProvider {
      * 토큰 유효성 검증
      */
     public boolean isTokenValid(String token) {
+        if (token == null || token.isEmpty()) {
+            return false;
+        }
         try {
             JWT.require(Algorithm.HMAC512(secretKey))
                     .build()
                     .verify(token);
             return true;
         } catch (JWTVerificationException e) {
-            log.error(MESSAGE);
             return false;
         }
     }
@@ -159,7 +122,7 @@ public class JwtTokenProvider {
                     )
             );
         } catch (JWTVerificationException e) {
-            log.error(MESSAGE);
+            log.error("Claim extraction failed: {}", e.getMessage());
             return Optional.empty();
         }
     }
