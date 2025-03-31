@@ -42,8 +42,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/register", "/api/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterAfter(customJsonUsernamePasswordAuthenticationFilter(), LogoutFilter.class)
-                .addFilterBefore(jwtAuthenticationProcessingFilter(),
+                .addFilterAfter(customAuthenticationProcessingFilter(), LogoutFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter(),
                         CustomAuthenticationProcessingFilter.class
                 )
         ;
@@ -51,12 +51,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public Filter jwtAuthenticationProcessingFilter() {
-        return new JwtAuthenticationFilter(jwtTokenProvider, userRepository);
+    public Filter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtTokenProvider, userRepository, objectMapper);
     }
 
     @Bean
-    public Filter customJsonUsernamePasswordAuthenticationFilter() {
+    public Filter customAuthenticationProcessingFilter() {
         CustomAuthenticationProcessingFilter customAuthenticationProcessingFilter
                 = new CustomAuthenticationProcessingFilter(objectMapper);
         customAuthenticationProcessingFilter.setAuthenticationManager(authenticationManager());
