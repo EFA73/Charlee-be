@@ -35,9 +35,7 @@ public class CompanyService {
 
     public Company updateCompany(Long companyId, String email, String password, String name) {
         String encodedPassword = passwordEncoder.encode(password);
-
-        var foundCompany = findCompany(companyId);
-
+        Company foundCompany = findCompany(companyId);
         foundCompany.updateEntity(email, encodedPassword, name);
 
         return companyRepository.save(foundCompany);

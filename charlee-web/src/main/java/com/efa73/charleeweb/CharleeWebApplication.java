@@ -13,5 +13,4 @@ public class CharleeWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(CharleeWebApplication.class, args);
     }
-
 }

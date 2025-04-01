@@ -45,7 +45,6 @@ asciidoctor {
 }
 
 bootJar {
-    dependsOn asciidoctor
     enabled = true
 }
 

@@ -47,7 +47,7 @@ public class CompanyIntegrationTest {
     @Autowired
     private CompanyRepository companyRepository;
 
-    Company savedCompany;
+    private Company savedCompany;
 
     @BeforeEach
     void setUp() {
@@ -166,7 +166,6 @@ public class CompanyIntegrationTest {
                                 )
                         ))
                 .andReturn();
-
     }
 
     @Test

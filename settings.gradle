@@ -2,3 +2,5 @@ rootProject.name = 'charlee'
 include 'charlee-collector'
 include 'charlee-emulator'
 include 'charlee-web'
+include 'charlee-common'
+
