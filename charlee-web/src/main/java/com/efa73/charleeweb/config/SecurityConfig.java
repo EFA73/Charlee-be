@@ -1,12 +1,12 @@
 package com.efa73.charleeweb.config;
 
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
-import com.efa73.charleeweb.user.jwt.JwtAuthenticationFilter;
-import com.efa73.charleeweb.user.jwt.JwtTokenProvider;
-import com.efa73.charleeweb.user.login.filter.CustomAuthenticationProcessingFilter;
-import com.efa73.charleeweb.user.login.handler.LoginFailureHandler;
-import com.efa73.charleeweb.user.login.handler.LoginSuccessHandler;
-import com.efa73.charleeweb.user.login.service.CustomUserDetailsService;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.jwt.JwtAuthenticationFilter;
+import com.efa73.charleeweb.account.jwt.JwtTokenProvider;
+import com.efa73.charleeweb.account.login.filter.CustomAuthenticationProcessingFilter;
+import com.efa73.charleeweb.account.login.handler.LoginFailureHandler;
+import com.efa73.charleeweb.account.login.handler.LoginSuccessHandler;
+import com.efa73.charleeweb.account.login.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService customUserDetailsService;
     private final ObjectMapper objectMapper;
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -53,7 +53,7 @@ public class SecurityConfig {
 
     @Bean
     public Filter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(jwtTokenProvider, userRepository, objectMapper);
+        return new JwtAuthenticationFilter(jwtTokenProvider, accountRepository, objectMapper);
     }
 
     @Bean
@@ -73,7 +73,7 @@ public class SecurityConfig {
 
     @Bean
     public LoginSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessHandler(jwtTokenProvider, userRepository, objectMapper);
+        return new LoginSuccessHandler(jwtTokenProvider, accountRepository, objectMapper);
     }
 
     @Bean

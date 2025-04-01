@@ -1,7 +1,7 @@
-package com.efa73.charleeweb.user.interfaces.dto;
+package com.efa73.charleeweb.account.interfaces.dto;
 
-import com.efa73.charleeweb.user.domain.entity.Role;
-import com.efa73.charleeweb.user.domain.entity.User;
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.entity.Role;
 
 /**
  * DTO for {@link User}
@@ -17,12 +17,12 @@ public record RegisterRequest(
         return new RegisterRequest(name, email, phone, role);
     }
 
-    public static RegisterRequest from(User user) {
+    public static RegisterRequest from(Account account) {
         return new RegisterRequest(
-                user.getEmail(),
-                user.getName(),
-                user.getPhone(),
-                user.getRole()
+                account.getName(),
+                account.getEmail(),
+                account.getPhone(),
+                account.getRole()
         );
     }
 }

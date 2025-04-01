@@ -1,4 +1,4 @@
-package com.efa73.charleeweb.user.jwt;
+package com.efa73.charleeweb.account.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

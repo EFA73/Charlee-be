@@ -1,10 +1,10 @@
-package com.efa73.charleeweb.user.jwt;
+package com.efa73.charleeweb.account.jwt;
 
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.common.exception.ExceptionResponse;
-import com.efa73.charleeweb.user.domain.entity.User;
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     );
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     private final ObjectMapper objectMapper;
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
@@ -92,7 +92,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 .filter(jwtTokenProvider::isTokenValid)
                 .ifPresent(accessToken -> {
                     jwtTokenProvider.extractEmail(accessToken)
-                            .ifPresent(email -> userRepository.findByEmail(email)
+                            .ifPresent(email -> accountRepository.findByEmail(email)
                                     .ifPresent(this::saveAuthentication)
                             );
                     jwtTokenProvider.extractUserId(accessToken)
@@ -104,13 +104,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
      * AccessToken 인증 성공 이후, 해당 객체를 SecurityCntextHolder에 담아 인증 처리
      */
-    private void saveAuthentication(User user) {
-        String password = user.getPassword();
+    private void saveAuthentication(Account account) {
+        String password = account.getPassword();
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
+                .username(account.getEmail())
                 .password(password)
-                .roles(user.getRole().name())
+                .roles(account.getRole().name())
                 .build();
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

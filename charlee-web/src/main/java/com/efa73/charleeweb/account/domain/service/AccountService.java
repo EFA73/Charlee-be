@@ -1,10 +1,10 @@
-package com.efa73.charleeweb.user.domain.service;
+package com.efa73.charleeweb.account.domain.service;
 
+import com.efa73.charleeweb.account.domain.entity.Account;
+import com.efa73.charleeweb.account.domain.repository.AccountRepository;
+import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
-import com.efa73.charleeweb.user.domain.entity.User;
-import com.efa73.charleeweb.user.domain.repository.UserRepository;
-import com.efa73.charleeweb.user.interfaces.dto.RegisterRequest;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,27 +15,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserService {
+public class AccountService {
 
-    private final UserRepository userRepository;
+    private final AccountRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Long registerUser(RegisterRequest request) {
+//    public Long registerAccount(RegisterRequest request) {
+    public Account registerAccount(RegisterRequest request) {
         validateEmailDuplicate(request.email());
         String rawPassword = generateRandomPassword();
         log.info("register password: {}", rawPassword); //TODO: notifyPassword() 구현 후 삭제
-        User user = User.of(
+        Account account = Account.of(
                 request.name(),
                 request.email(),
                 passwordEncoder.encode(rawPassword),
                 request.phone(),
                 request.role()
         );
-        User savedUser = userRepository.save(user);
+        Account savedAccount = userRepository.save(account);
 //        notifyPassword(); //TODO: 새 유저에게 패스워드 알려주는 기능 필요
 //        return user.getId(); //TODO: 질문
-        return savedUser.getId();
+//        return savedAccount.getId();
+        return savedAccount;
     }
 
     private void validateEmailDuplicate(String email) {

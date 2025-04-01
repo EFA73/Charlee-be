@@ -3,6 +3,7 @@ package com.efa73.charleeweb.company.domain.service;
 import com.efa73.charleeweb.account.domain.entity.Account;
 import com.efa73.charleeweb.account.domain.entity.Role;
 import com.efa73.charleeweb.account.domain.service.AccountService;
+import com.efa73.charleeweb.account.interfaces.dto.RegisterRequest;
 import com.efa73.charleeweb.common.exception.CharleeException;
 import com.efa73.charleeweb.common.exception.CommonErrorCode;
 import com.efa73.charleeweb.company.domain.entity.Company;
@@ -23,7 +24,8 @@ public class CompanyService {
     @Transactional
     public Company createCompany(String email, String password, String name) {
         String encodedPassword = passwordEncoder.encode(password);
-        Account account = accountService.create(email, encodedPassword, Role.COMPANY);
+        RegisterRequest registerRequest = new RegisterRequest(name, email, password, Role.COMPANY);
+        Account account = accountService.registerAccount(registerRequest);
         Company company = Company.createEntity(name, account);
 
         return companyRepository.save(company);
