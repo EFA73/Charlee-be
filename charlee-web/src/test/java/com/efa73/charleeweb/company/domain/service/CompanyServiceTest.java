@@ -87,7 +87,6 @@ class CompanyServiceTest {
         when(passwordEncoder.encode(rawPassword)).thenReturn(encodedPassword);
         when(accountService.create(email, encodedPassword, Role.COMPANY))
                 .thenThrow(new CharleeException(CommonErrorCode.EMAIL_ALREADY_EXISTS));
-        when(companyRepository.save(any(Company.class))).thenReturn(company);
 
         assertThrows(CharleeException.class, () ->
                         companyService.createCompany(email, rawPassword, name),
