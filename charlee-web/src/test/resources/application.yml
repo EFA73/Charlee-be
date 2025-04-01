@@ -1,7 +1,7 @@
 spring:
   config:
-    activate:
-      on-profile: test
+    import:
+      - optional:classpath:.env[.properties]
 
   datasource:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}?useSSL=${MYSQL_SSL}&useUnicode=${MYSQL_UNICODE}&allowPublicKeyRetrieval=${MYSQL_KEY}
@@ -9,13 +9,21 @@ spring:
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-# TODO: test db를 h2로 하게 되면 아래 설정 이용
-#  datasource:
-#    url: jdbc:h2:mem:test;MODE=MySQL;DATABASE_TO_UPPER=false
-#    #    url: jdbc:h2:mem:test
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  cloud:
+    vault:
+      enabled: false
+
+admin:
+  name: ${ADMIN_NAME}
+  email: ${ADMIN_EMAIL}
+  password: ${ADMIN_PASSWORD}
 
 logging:
   level:

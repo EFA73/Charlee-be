@@ -3,7 +3,8 @@ package com.efa73.charleeweb.company.interfaces.controller;
 import com.efa73.charleeweb.common.Api;
 import com.efa73.charleeweb.company.domain.entity.Company;
 import com.efa73.charleeweb.company.domain.service.CompanyService;
-import com.efa73.charleeweb.company.interfaces.dto.request.CompanyRequest;
+import com.efa73.charleeweb.company.interfaces.dto.request.CompanyCreateRequest;
+import com.efa73.charleeweb.company.interfaces.dto.request.CompanyUpdateRequest;
 import com.efa73.charleeweb.company.interfaces.dto.response.CompanyResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,12 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping("")
-    public ResponseEntity<Api<CompanyResponse>> createCompany(@RequestBody CompanyRequest companyRequest) {
-
-        Company company = companyService.createCompany(CompanyRequest.createEntity(companyRequest));
+    public ResponseEntity<Api<CompanyResponse>> createCompany(@RequestBody CompanyCreateRequest request) {
+        Company company = companyService.createCompany(
+                request.email(),
+                request.password(),
+                request.name()
+        );
 
         CompanyResponse response = CompanyResponse.createDto(company);
 
@@ -37,7 +41,6 @@ public class CompanyController {
 
     @GetMapping("/{companyId}")
     public ResponseEntity<Api<CompanyResponse>> getCompany(@PathVariable Long companyId) {
-
         Company company = companyService.getCompany(companyId);
 
         CompanyResponse response = CompanyResponse.createDto(company);
@@ -47,9 +50,14 @@ public class CompanyController {
     }
 
     @PutMapping("/{companyId}")
-    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyRequest companyRequest,
+    public ResponseEntity<Api<CompanyResponse>> updateCompany(@RequestBody CompanyUpdateRequest request,
                                                               @PathVariable Long companyId) {
-        Company updatedCompany = companyService.updateCompany(companyRequest, companyId);
+        Company updatedCompany = companyService.updateCompany(
+                companyId,
+                request.email(),
+                request.password(),
+                request.name()
+        );
 
         CompanyResponse response = CompanyResponse.createDto(updatedCompany);
 
@@ -59,7 +67,6 @@ public class CompanyController {
 
     @DeleteMapping("/{companyId}")
     public ResponseEntity<Api<CompanyResponse>> deleteCompany(@PathVariable Long companyId) {
-
         companyService.deleteCompany(companyId);
 
         return ResponseEntity.noContent().build();

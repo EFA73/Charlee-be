@@ -6,6 +6,15 @@ on:
 
 jobs:
   build:
+    env:
+      MYSQL_HOST: localhost
+      MYSQL_PORT: 3306
+      MYSQL_DB: charlee
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root1234!!
+      MYSQL_SSL: false
+      MYSQL_UNICODE: true
+      MYSQL_KEY: true
     name: Build
     runs-on: ubuntu-latest
     services:
@@ -13,7 +22,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root1234!!
-          MYSQL_DATABASE: test_db
+          MYSQL_DATABASE: charlee
           MYSQL_USER: user
           MYSQL_PASSWORD: 1234
         ports:
