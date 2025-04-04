@@ -15,8 +15,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 jwt:
-  expiration_time: ${JWT_EXP_TIME}
-  secret: ${JWT_SECRET}
+  secretKey: ${JWT_SECRET}
+  access:
+    expiration: ${JWT_ACCESS_EXP_TIME}
+    header: ${JWT_ACCESS_HEADER}
+  refresh:
+    expiration: ${JWT_REFRESH_EXP_TIME}
+    header: ${JWT_REFRESH_HEADER}
+
 
 admin:
   name: ${ADMIN_NAME}

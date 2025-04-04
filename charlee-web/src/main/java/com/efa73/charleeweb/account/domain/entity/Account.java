@@ -8,20 +8,21 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "account")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 public class Account extends Common {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -29,18 +30,22 @@ public class Account extends Common {
     @Column(nullable = false)
     private String password;
 
+    private String phone;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private Account(String email, String password, Role role) {
+    private Account(String name, String email, String password, String phone, Role role) {
+        this.name = name;
         this.email = email;
         this.password = password;
+        this.phone = phone;
         this.role = role;
     }
 
-    public static Account createEntity(String email, String password, Role role) {
-        return new Account(email, password, role);
+    public static Account of(String name, String email, String password, String phone, Role role) {
+        return new Account(name, email, password, phone, role);
     }
 
     public void updateEntity(String email, String password) {
